@@ -8,11 +8,10 @@
 
 import UIKit
 
-class RecentCell: UICollectionViewCell {
+class RecentCell: CardCell, SelfConfiguringCell {
     
 //    MARK: Class Constants
     static let resueIdentifier = "RecentCell"
-    let cornerRadius: CGFloat = 10
     
 //    MARK: Class Variables
     var recent: Recent?
@@ -109,8 +108,6 @@ class RecentCell: UICollectionViewCell {
     }
     
     @objc func bookmarkDidChange() {
-        print("\(Date()) \(URL(fileURLWithPath: #file).deletingPathExtension().lastPathComponent).\(#function)")
-        
         bookmarkBtn.setImage((recent?.bookmarked ?? false) ?
             UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
     }

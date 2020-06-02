@@ -55,15 +55,14 @@ class MasterViewController: UICollectionViewController {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
             var width = NSCollectionLayoutDimension.fractionalWidth(1)
             var height = NSCollectionLayoutDimension.fractionalWidth(0.625)
-            var interGroupSpacing: CGFloat = 20
             
+//            For non-plus iPhones in landscape
             if layoutEnvironment.traitCollection.verticalSizeClass == .compact && layoutEnvironment.traitCollection.horizontalSizeClass == .compact {
                 width = .fractionalWidth(0.5)
-                height = .fractionalHeight(0.9)
-                interGroupSpacing = 0
+                height = .fractionalWidth(0.3125)
             }
             
-            let itemSize = NSCollectionLayoutSize(widthDimension: width, heightDimension: height)
+            let itemSize = NSCollectionLayoutSize(widthDimension: width, heightDimension: .fractionalHeight(1))
             
             let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
             layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
@@ -72,7 +71,7 @@ class MasterViewController: UICollectionViewController {
             let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitems: [layoutItem])
             
             let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-            layoutSection.interGroupSpacing = interGroupSpacing
+            layoutSection.interGroupSpacing = 20
             
             return layoutSection
         }

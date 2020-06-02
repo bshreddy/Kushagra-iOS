@@ -21,6 +21,9 @@
 		722D3C122486AD6A005D6D83 /* Classes.json in Resources */ = {isa = PBXBuildFile; fileRef = 722D3C112486AD6A005D6D83 /* Classes.json */; };
 		722D3C142486AFBC005D6D83 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D3C132486AFBC005D6D83 /* ImageCell.swift */; };
 		722D3C192486B17B005D6D83 /* Prediction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722D3C1B2486B17B005D6D83 /* Prediction.storyboard */; };
+		722D3C1D2486BBBC005D6D83 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D3C1C2486BBBC005D6D83 /* CardCell.swift */; };
+		722D3C1F2486BD5E005D6D83 /* SelfConfiguringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D3C1E2486BD5E005D6D83 /* SelfConfiguringCell.swift */; };
+		722D3C212486CBBE005D6D83 /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D3C202486CBBE005D6D83 /* MapCell.swift */; };
 		72E144E024850F210009469E /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E144DF24850F210009469E /* MasterViewController.swift */; };
 		72E144E224850F720009469E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E144E124850F720009469E /* DetailViewController.swift */; };
 		72E144E4248510710009469E /* PredictionSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E144E3248510710009469E /* PredictionSplitViewController.swift */; };
@@ -45,6 +48,9 @@
 		722D3C112486AD6A005D6D83 /* Classes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Classes.json; sourceTree = "<group>"; };
 		722D3C132486AFBC005D6D83 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		722D3C1A2486B17B005D6D83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Prediction.storyboard; sourceTree = "<group>"; };
+		722D3C1C2486BBBC005D6D83 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
+		722D3C1E2486BD5E005D6D83 /* SelfConfiguringCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfConfiguringCell.swift; sourceTree = "<group>"; };
+		722D3C202486CBBE005D6D83 /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
 		72E144DF24850F210009469E /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		72E144E124850F720009469E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		72E144E3248510710009469E /* PredictionSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionSplitViewController.swift; sourceTree = "<group>"; };
@@ -156,8 +162,11 @@
 		722D3C0E248652E7005D6D83 /* Prediction */ = {
 			isa = PBXGroup;
 			children = (
+				722D3C1C2486BBBC005D6D83 /* CardCell.swift */,
 				722D3C0F24865308005D6D83 /* RecentCell.swift */,
 				722D3C132486AFBC005D6D83 /* ImageCell.swift */,
+				722D3C202486CBBE005D6D83 /* MapCell.swift */,
+				722D3C1E2486BD5E005D6D83 /* SelfConfiguringCell.swift */,
 			);
 			path = Prediction;
 			sourceTree = "<group>";
@@ -252,11 +261,14 @@
 				722589A0248507C5008091DB /* AppDelegate.swift in Sources */,
 				722D3C142486AFBC005D6D83 /* ImageCell.swift in Sources */,
 				722589A2248507C5008091DB /* SceneDelegate.swift in Sources */,
+				722D3C1F2486BD5E005D6D83 /* SelfConfiguringCell.swift in Sources */,
 				72E144E024850F210009469E /* MasterViewController.swift in Sources */,
 				72E144E224850F720009469E /* DetailViewController.swift in Sources */,
 				722D3C1024865308005D6D83 /* RecentCell.swift in Sources */,
 				72E144E4248510710009469E /* PredictionSplitViewController.swift in Sources */,
+				722D3C1D2486BBBC005D6D83 /* CardCell.swift in Sources */,
 				72E144E9248517990009469E /* Extensions.swift in Sources */,
+				722D3C212486CBBE005D6D83 /* MapCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
