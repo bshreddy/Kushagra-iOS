@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Disease-->
+        <scene sceneID="XqE-3f-5Yp">
+            <objects>
+                <splitViewController storyboardIdentifier="UISplitViewController-gDO-ua-ARO" id="gDO-ua-ARO" customClass="PredictionSplitViewController" customModule="Crop_Prediction" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Disease" image="ant.fill" catalog="system" id="EE6-IQ-LTr"/>
+                    <connections>
+                        <segue destination="zGr-om-3DJ" kind="relationship" relationship="masterViewController" id="UhQ-4i-665"/>
+                        <segue destination="vyp-fn-sTK" kind="relationship" relationship="detailViewController" id="TZZ-lj-U8F"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qn4-89-PRP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-178" y="520"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="b0g-OY-naR">
+            <objects>
+                <collectionViewController id="USC-Qj-0Lp" customClass="DetailViewController" customModule="Crop_Prediction" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="6Tn-jE-qti">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6qi-TC-gXk">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U44-LA-s4Y">
+                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vzX-sX-Wth">
+                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionViewCellContentView>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="USC-Qj-0Lp" id="vcE-Bp-sLW"/>
+                            <outlet property="delegate" destination="USC-Qj-0Lp" id="iqD-0Y-4wH"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="QCg-Gi-ooY"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Aoy-aJ-sey" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="739" y="520"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="AiH-fT-xmY">
+            <objects>
+                <navigationController id="zGr-om-3DJ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="JGj-ah-Wof">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="4Dh-qh-Syd" kind="relationship" relationship="rootViewController" id="M28-RV-sPR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8n7-Vx-475" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="740" y="-200"/>
+        </scene>
+        <!--My Crops-->
+        <scene sceneID="ZIO-hO-tOH">
+            <objects>
+                <collectionViewController id="4Dh-qh-Syd" customClass="MasterViewController" customModule="Crop_Prediction" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="vNX-Lw-a4L">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <collectionViewLayout key="collectionViewLayout" id="Lfs-ey-YPC"/>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bSX-jf-M0I">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fsi-et-jmD">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionViewCellContentView>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="4Dh-qh-Syd" id="bLk-jT-9TW"/>
+                            <outlet property="delegate" destination="4Dh-qh-Syd" id="yDD-ZU-qzM"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="My Crops" id="Maj-XS-8DR">
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="ndr-sa-o2J">
+                            <connections>
+                                <action selector="cameraTapped:" destination="4Dh-qh-Syd" id="jfK-mK-HAF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="Nq9-hi-1pj" kind="presentation" identifier="New Detection" modalPresentationStyle="pageSheet" id="gy2-by-uC5"/>
+                        <segue destination="Nq9-hi-1pj" kind="showDetail" identifier="Show Detail" id="4en-hE-HuR"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zuw-tK-ozj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1642" y="-200"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="pTE-LO-8CK">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j4r-XD-Hsr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController id="Nq9-hi-1pj" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="b3Y-pX-uzl">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="USC-Qj-0Lp" kind="relationship" relationship="rootViewController" id="uGi-wC-OM5"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="1641" y="520"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="bqi-fn-F7r">
+            <objects>
+                <viewController id="vyp-fn-sTK" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="70r-at-4Lh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="uT6-1F-pGY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fn7-P3-P13" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1104" y="131"/>
+        </scene>
+        <!--Crop-->
+        <scene sceneID="qY2-lc-kU9">
+            <objects>
+                <splitViewController storyboardIdentifier="UISplitViewController-bbH-S9-c9E" id="bbH-S9-c9E" customClass="PredictionSplitViewController" customModule="Crop_Prediction" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Crop" image="leaf.arrow.circlepath" catalog="system" id="xoV-mi-XDn"/>
+                    <connections>
+                        <segue destination="zGr-om-3DJ" kind="relationship" relationship="masterViewController" id="3Lv-14-UE3"/>
+                        <segue destination="vyp-fn-sTK" kind="relationship" relationship="detailViewController" id="Bvy-6K-W95"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Csb-YG-sZb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-178" y="-200"/>
+        </scene>
+    </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Bvy-6K-W95"/>
+        <segue reference="4en-hE-HuR"/>
+        <segue reference="3Lv-14-UE3"/>
+    </inferredMetricsTieBreakers>
+    <resources>
+        <image name="ant.fill" catalog="system" width="107" height="128"/>
+        <image name="leaf.arrow.circlepath" catalog="system" width="121" height="128"/>
+    </resources>
+</document>
