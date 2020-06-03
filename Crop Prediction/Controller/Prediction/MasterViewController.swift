@@ -27,7 +27,7 @@ class MasterViewController: UICollectionViewController {
         imagePicker.delegate = self
         
         collectionView.collectionViewLayout = createLayout()
-        collectionView.register(RecentCell.self, forCellWithReuseIdentifier: RecentCell.resueIdentifier)
+        collectionView.register(RecentCell.self, forCellWithReuseIdentifier: RecentCell.reuseIdentifier)
         
         loadData()
     }
@@ -65,13 +65,14 @@ class MasterViewController: UICollectionViewController {
             let itemSize = NSCollectionLayoutSize(widthDimension: width, heightDimension: .fractionalHeight(1))
             
             let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-            layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+//            layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
             
             let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: height)
             let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitems: [layoutItem])
             
             let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
             layoutSection.interGroupSpacing = 20
+            layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 16, trailing: 10)
             
             return layoutSection
         }
@@ -128,7 +129,7 @@ extension MasterViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentCell.resueIdentifier, for: indexPath) as! RecentCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentCell.reuseIdentifier, for: indexPath) as! RecentCell
         let recent = recents[indexPath]
         
         cell.configure(with: recent)

@@ -51,6 +51,7 @@
 		722D3C1C2486BBBC005D6D83 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		722D3C1E2486BD5E005D6D83 /* SelfConfiguringCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfConfiguringCell.swift; sourceTree = "<group>"; };
 		722D3C202486CBBE005D6D83 /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
+		722D3C222487CF87005D6D83 /* Crop Prediction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Crop Prediction.entitlements"; sourceTree = "<group>"; };
 		72E144DF24850F210009469E /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		72E144E124850F720009469E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		72E144E3248510710009469E /* PredictionSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionSplitViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +99,7 @@
 		7225899E248507C5008091DB /* Crop Prediction */ = {
 			isa = PBXGroup;
 			children = (
+				722D3C222487CF87005D6D83 /* Crop Prediction.entitlements */,
 				7225899F248507C5008091DB /* AppDelegate.swift */,
 				722589A1248507C5008091DB /* SceneDelegate.swift */,
 				722D3C0224861E5E005D6D83 /* Models */,
@@ -428,6 +430,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Crop Prediction/Crop Prediction.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LW8T8WKL5S;
 				INFOPLIST_FILE = "Crop Prediction/Supporting Files/Info.plist";
@@ -438,6 +441,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.project.CropPrediction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -447,6 +451,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Crop Prediction/Crop Prediction.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LW8T8WKL5S;
 				INFOPLIST_FILE = "Crop Prediction/Supporting Files/Info.plist";
@@ -457,6 +462,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.project.CropPrediction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

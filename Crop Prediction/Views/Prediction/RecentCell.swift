@@ -11,7 +11,7 @@ import UIKit
 class RecentCell: CardCell, SelfConfiguringCell {
     
 //    MARK: Class Constants
-    static let resueIdentifier = "RecentCell"
+    static let reuseIdentifier = "RecentCell"
     
 //    MARK: Class Variables
     var recent: Recent?

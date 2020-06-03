@@ -12,7 +12,7 @@ import MapKit
 class MapCell: CardCell, SelfConfiguringCell {
 
 //    MARK: Class Variables
-    static let resueIdentifier = "MapCell"
+    static let reuseIdentifier = "MapCell"
     
 //    MARK: UI Variables
     let mapView = MKMapView()

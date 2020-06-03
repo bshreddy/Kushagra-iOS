@@ -9,7 +9,7 @@
 import Foundation
 
 protocol SelfConfiguringCell {
-    static var resueIdentifier: String { get }
+    static var reuseIdentifier: String { get }
     func configure(with recent: Recent)
     func deconfigure()
 }

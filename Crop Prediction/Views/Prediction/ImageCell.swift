@@ -11,7 +11,7 @@ import UIKit
 class ImageCell: CardCell, SelfConfiguringCell {
     
 //    MARK: Class Constants
-    static let resueIdentifier = "ImageCell"
+    static let reuseIdentifier = "ImageCell"
     
 //    MARK: UI Variables
     let imageView = UIImageView()
