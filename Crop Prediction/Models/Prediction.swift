@@ -50,12 +50,12 @@ class Prediction: Codable, CustomStringConvertible {
                                .disease: ServerURL.appendingPathComponent("disease")]
     
     var image: UIImage?
-    private(set) var predicted_idx: Int
+    private(set) var predictedIdx: Int
     private(set) var confidences: [Float]
     private(set) var kind: Kind
     
     var predictedClass: String {
-        Prediction.classes[kind]![predicted_idx]
+        Prediction.classes[kind]![predictedIdx]
     }
     
     var predictedName: String {
@@ -72,21 +72,21 @@ class Prediction: Codable, CustomStringConvertible {
     
     init(_ image: UIImage? = nil, _ predicted_idx: Int, _ confidences: [Float], _ kind: Kind) {
         self.image = image
-        self.predicted_idx = predicted_idx
+        self.predictedIdx = predicted_idx
         self.confidences = confidences
         self.kind = kind
     }
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.predicted_idx = try container.decode(Int.self, forKey: .predicted_idx)
+        self.predictedIdx = try container.decode(Int.self, forKey: .predicted_idx)
         self.confidences = try container.decode([Float].self, forKey: .confidences)
         self.kind = Kind(rawValue: try container.decode(String.self, forKey: .kind))!
     }
     
     func encode(to encoder: Encoder) throws {
         var container = try encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(predicted_idx, forKey: .predicted_idx)
+        try container.encode(predictedIdx, forKey: .predicted_idx)
         try container.encode(confidences, forKey: .confidences)
         try container.encode(kind.rawValue, forKey: .kind)
     }

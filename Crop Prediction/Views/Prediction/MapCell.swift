@@ -43,7 +43,7 @@ class MapCell: CardCell, SelfConfiguringCell {
         fatalError("Not Implemented")
     }
     
-    func configure(with recent: Recent) {
+    func configure(with recent: Recent, for indexPath: IndexPath) {
         guard let location = recent.location else {
             return
         }

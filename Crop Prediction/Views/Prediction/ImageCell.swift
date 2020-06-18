@@ -37,7 +37,7 @@ class ImageCell: CardCell, SelfConfiguringCell {
         fatalError("Not Implemented")
     }
     
-    func configure(with recent: Recent) {
+    func configure(with recent: Recent, for indexPath: IndexPath) {
         imageView.image = recent.prediction.image ?? recent.prediction.defaultImage
     }
     

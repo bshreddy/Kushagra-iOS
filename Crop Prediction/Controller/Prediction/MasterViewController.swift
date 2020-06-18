@@ -130,9 +130,9 @@ extension MasterViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentCell.reuseIdentifier, for: indexPath) as! RecentCell
-        let recent = recents[indexPath]
+        let recent = recents[indexPath.row]
         
-        cell.configure(with: recent)
+        cell.configure(with: recent, for: indexPath)
         
         return cell
     }

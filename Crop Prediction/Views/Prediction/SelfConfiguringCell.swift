@@ -10,6 +10,6 @@ import Foundation
 
 protocol SelfConfiguringCell {
     static var reuseIdentifier: String { get }
-    func configure(with recent: Recent)
+    func configure(with recent: Recent, for indexPath: IndexPath)
     func deconfigure()
 }

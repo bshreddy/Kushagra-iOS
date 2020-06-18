@@ -90,7 +90,7 @@ class RecentCell: CardCell, SelfConfiguringCell {
         fatalError("Not Implemented")
     }
     
-    func configure(with recent: Recent) {
+    func configure(with recent: Recent, for indexPath: IndexPath) {
         self.recent = recent
         
         title.text = recent.prediction.predictedName

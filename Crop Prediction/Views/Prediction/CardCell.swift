@@ -12,4 +12,16 @@ class CardCell: UICollectionViewCell {
     
     let cornerRadius: CGFloat = 10
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        backgroundColor = .cardBackground
+        layer.cornerRadius = cornerRadius
+        clipsToBounds = true
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Not Implemented")
+    }
+    
 }

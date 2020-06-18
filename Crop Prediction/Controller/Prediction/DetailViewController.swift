@@ -60,14 +60,24 @@ class DetailViewController: UICollectionViewController {
     
     func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
-            switch self.cells[sectionIndex].reuseIdentifier {
-            case ImageCell.reuseIdentifier:
-                return self.createImageLayout(layoutEnvironment)
-            case MapCell.reuseIdentifier:
-                return self.createMapLayout(layoutEnvironment)
-            default:
-                fatalError("Invalid reuseIdentifier")
+            var width = NSCollectionLayoutDimension.fractionalWidth(1)
+            var height = NSCollectionLayoutDimension.fractionalWidth(0.625)
+            
+            if layoutEnvironment.traitCollection.horizontalSizeClass == layoutEnvironment.traitCollection.verticalSizeClass {
+                width = NSCollectionLayoutDimension.fractionalWidth(0.6)
+                height = NSCollectionLayoutDimension.fractionalWidth(0.375)
             }
+            
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+            let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+            
+            let groupSize = NSCollectionLayoutSize(widthDimension: width, heightDimension: height)
+            let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [layoutItem])
+            
+            let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+            layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+            
+            return layoutSection
         }
         
         return layout
@@ -80,27 +90,6 @@ class DetailViewController: UICollectionViewController {
 //        if layoutEnvironment.traitCollection.horizontalSizeClass == layoutEnvironment.traitCollection.verticalSizeClass {
 //            width = NSCollectionLayoutDimension.fractionalWidth(0.6)
 //            height = NSCollectionLayoutDimension.fractionalWidth(0.375)
-//        }
-        
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: width, heightDimension: height)
-        let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [layoutItem])
-        
-        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-        layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        
-        return layoutSection
-    }
-    
-    func createMapLayout(_ layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        var width = NSCollectionLayoutDimension.fractionalWidth(1)
-        var height = NSCollectionLayoutDimension.fractionalWidth(1)
-        
-//        if layoutEnvironment.traitCollection.horizontalSizeClass == layoutEnvironment.traitCollection.verticalSizeClass {
-//            width = NSCollectionLayoutDimension.fractionalWidth(0.4)
-//            height = NSCollectionLayoutDimension.fractionalWidth(0.4)
 //        }
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -145,7 +134,7 @@ extension DetailViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cells[indexPath.section].reuseIdentifier, for: indexPath) as! SelfConfiguringCell
         
-        cell.configure(with: recent)
+        cell.configure(with: recent, for: indexPath)
         
         return cell as! UICollectionViewCell
     }

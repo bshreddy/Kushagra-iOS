@@ -52,7 +52,7 @@ extension Bundle {
 extension Array {
     
     subscript(_ indexPath: IndexPath) -> Element {
-        self[indexPath.row]
+        self[indexPath.section]
     }
     
 }
