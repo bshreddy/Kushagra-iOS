@@ -21,7 +21,9 @@ class ListCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        imageView.image = nil
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         title.font = UIFont.preferredFont(forTextStyle: .body)
         title.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +66,16 @@ class DetailsTextCell: ListCell, SelfConfiguringCell {
     
     static var reuseIdentifier: String { "PredictionTextCell" }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        imageView.isHidden = true
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Not Implemented")
+    }
+    
     func configure(with recent: Recent, for indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
@@ -97,6 +109,7 @@ class DetailsTextCell: ListCell, SelfConfiguringCell {
 class ActionCell: ListCell, SelfConfiguringCell {
     
     static var reuseIdentifier: String { "DetailsTextCell" }
+    var recent: Recent?
     
     enum Action: String {
         case bookmark = "Bookmark"
@@ -117,12 +130,14 @@ class ActionCell: ListCell, SelfConfiguringCell {
         let iconName = actionIcons[ActionCell.actions[indexPath.row]]!
         title.text = ActionCell.actions[indexPath.row].rawValue
         title.textColor = .systemBlue
+        imageView.tintColor = .systemBlue
         
         imageView.image = UIImage(systemName: iconName)
         
         switch ActionCell.actions[indexPath.row] {
         case .bookmark:
             title.text = "\((recent.bookmarked) ? "Remove from" : "Add to") Bookmarks"
+            imageView.image = UIImage(systemName: "\(iconName)\((recent.bookmarked) ? ".fill" : "")")
             
         case .delete:
             title.textColor = .systemRed
@@ -133,7 +148,6 @@ class ActionCell: ListCell, SelfConfiguringCell {
     }
     
     func deconfigure() {
-        
     }
     
 }

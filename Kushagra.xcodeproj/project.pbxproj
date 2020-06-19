@@ -24,7 +24,7 @@
 		722D3C1D2486BBBC005D6D83 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D3C1C2486BBBC005D6D83 /* CardCell.swift */; };
 		722D3C1F2486BD5E005D6D83 /* SelfConfiguringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D3C1E2486BD5E005D6D83 /* SelfConfiguringCell.swift */; };
 		722D3C212486CBBE005D6D83 /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D3C202486CBBE005D6D83 /* MapCell.swift */; };
-		722D3C242487ECE3005D6D83 /* MediumTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D3C232487ECE3005D6D83 /* MediumTextCell.swift */; };
+		722D3C242487ECE3005D6D83 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D3C232487ECE3005D6D83 /* ListCell.swift */; };
 		72E144E024850F210009469E /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E144DF24850F210009469E /* MasterViewController.swift */; };
 		72E144E224850F720009469E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E144E124850F720009469E /* DetailViewController.swift */; };
 		72E144E4248510710009469E /* PredictionSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E144E3248510710009469E /* PredictionSplitViewController.swift */; };
@@ -53,7 +53,7 @@
 		722D3C1E2486BD5E005D6D83 /* SelfConfiguringCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfConfiguringCell.swift; sourceTree = "<group>"; };
 		722D3C202486CBBE005D6D83 /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
 		722D3C222487CF87005D6D83 /* Crop Prediction.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Crop Prediction.entitlements"; sourceTree = "<group>"; };
-		722D3C232487ECE3005D6D83 /* MediumTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumTextCell.swift; sourceTree = "<group>"; };
+		722D3C232487ECE3005D6D83 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		72E144DF24850F210009469E /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		72E144E124850F720009469E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		72E144E3248510710009469E /* PredictionSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionSplitViewController.swift; sourceTree = "<group>"; };
@@ -170,7 +170,7 @@
 				722D3C0F24865308005D6D83 /* RecentCell.swift */,
 				722D3C132486AFBC005D6D83 /* ImageCell.swift */,
 				722D3C202486CBBE005D6D83 /* MapCell.swift */,
-				722D3C232487ECE3005D6D83 /* MediumTextCell.swift */,
+				722D3C232487ECE3005D6D83 /* ListCell.swift */,
 				722D3C1E2486BD5E005D6D83 /* SelfConfiguringCell.swift */,
 			);
 			path = Prediction;
@@ -264,7 +264,7 @@
 				722D3C0824861EFA005D6D83 /* Location.swift in Sources */,
 				722D3C0624861EB4005D6D83 /* Prediction.swift in Sources */,
 				722589A0248507C5008091DB /* AppDelegate.swift in Sources */,
-				722D3C242487ECE3005D6D83 /* MediumTextCell.swift in Sources */,
+				722D3C242487ECE3005D6D83 /* ListCell.swift in Sources */,
 				722D3C142486AFBC005D6D83 /* ImageCell.swift in Sources */,
 				722589A2248507C5008091DB /* SceneDelegate.swift in Sources */,
 				722D3C1F2486BD5E005D6D83 /* SelfConfiguringCell.swift in Sources */,

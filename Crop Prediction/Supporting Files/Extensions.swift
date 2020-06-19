@@ -49,13 +49,13 @@ extension Bundle {
     
 }
 
-extension Array {
-    
-    subscript(_ indexPath: IndexPath) -> Element {
-        self[indexPath.section]
-    }
-    
-}
+//extension Array {
+//    
+//    subscript(_ indexPath: IndexPath) -> Element {
+//        self[indexPath.section]
+//    }
+//    
+//}
 
 extension Array where Element: Collection, Element.Index == Int {
     
@@ -119,6 +119,17 @@ extension UIColor {
             })
         } else {
             return defaultTableViewBackground
+        }
+    }
+    
+    static var listCellSelectedBackground: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor(dynamicProvider: { trait in
+                (trait.userInterfaceStyle == .light) ?
+                    UIColor(red: 0.82, green: 0.82, blue: 0.84, alpha: 1) : UIColor(red: 0.23, green: 0.23, blue: 0.24, alpha: 1)
+            })
+        } else {
+            return UIColor(red: 0.82, green: 0.82, blue: 0.84, alpha: 1)
         }
     }
     

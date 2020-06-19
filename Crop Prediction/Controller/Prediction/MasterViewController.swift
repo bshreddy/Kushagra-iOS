@@ -142,7 +142,7 @@ extension MasterViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "Show Detail", sender: recents[indexPath])
+        performSegue(withIdentifier: "Show Detail", sender: recents[indexPath.row])
     }
     
 }

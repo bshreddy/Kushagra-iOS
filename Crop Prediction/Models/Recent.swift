@@ -21,6 +21,7 @@ class Recent: Codable {
     }
     var createdAt: Date
     var location: Location?
+//    var details: CropDetails?
     
     enum CodingKeys: String, CodingKey {
         case prediction = "pred"
@@ -52,6 +53,10 @@ class Recent: Codable {
         try container.encode(bookmarked, forKey: .bookmarked)
         try container.encode(createdAt.timeIntervalSince1970, forKey: .createdAt)
         try container.encode(location, forKey: .location)
+    }
+    
+    func toggleBookmark() {
+        bookmarked.toggle()
     }
     
 }

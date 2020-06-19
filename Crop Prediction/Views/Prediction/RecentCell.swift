@@ -113,7 +113,7 @@ class RecentCell: CardCell, SelfConfiguringCell {
     }
     
     @objc func bookmarkBtnTapped() {
-        recent?.bookmarked.toggle()
+        recent?.toggleBookmark()
     }
     
 }

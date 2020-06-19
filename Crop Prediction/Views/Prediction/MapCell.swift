@@ -28,6 +28,7 @@ class MapCell: CardCell, SelfConfiguringCell {
         mapView.showsTraffic = false
         mapView.showsBuildings = false
         mapView.showsCompass = true
+        mapView.showsUserLocation = true
         mapView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(mapView)
         
@@ -51,6 +52,10 @@ class MapCell: CardCell, SelfConfiguringCell {
         mapView.setRegion(
             MKCoordinateRegion(center: location.clLocation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500),
             animated: true)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location.clLocation.coordinate
+        mapView.addAnnotation(annotation)
     }
     
     func deconfigure() {

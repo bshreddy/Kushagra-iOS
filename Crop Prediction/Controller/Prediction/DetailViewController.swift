@@ -24,7 +24,11 @@ class DetailViewController: UICollectionViewController {
     }
     
     var dataSource: UICollectionViewDiffableDataSource<Int, Int>!
-    var cells: [(UICollectionViewCell & SelfConfiguringCell).Type] = [ImageCell.self, MapCell.self]
+    var identifiers: [Identifier] = [.imageCell, .infoCell, .mapCell, .actionCell]
+    var cells: [Identifier: (UICollectionViewCell & SelfConfiguringCell).Type] = [.imageCell: ImageCell.self,
+                                                                                  .infoCell: DetailsTextCell.self,
+                                                                                  .mapCell: MapCell.self,
+                                                                                  .actionCell: ActionCell.self]
     
 //    MARK: Model Variables
     var recent: Recent!
@@ -40,66 +44,92 @@ class DetailViewController: UICollectionViewController {
             navigationItem.title = "\(mode.rawValue.capitalized) Details"
             navigationController?.navigationBar.prefersLargeTitles = true
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),
-                                                                style: .plain, target: self, action: #selector(optionsTapped))
+                                                                style: .plain, target: self, action: #selector(optionsTapped(_:)))
         }
         
         collectionView.collectionViewLayout = createLayout()
         
         for cell in cells {
-            collectionView.register(cell, forCellWithReuseIdentifier: cell.reuseIdentifier)
+            collectionView.register(cell.value, forCellWithReuseIdentifier: cell.value.reuseIdentifier)
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(bookmarkDidChange), name: Recent.bookmarkDidChange, object: recent)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Recent.bookmarkDidChange, object: recent)
     }
     
     func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
-            var width = NSCollectionLayoutDimension.fractionalWidth(1)
-            var height = NSCollectionLayoutDimension.fractionalWidth(0.625)
-            
-            if layoutEnvironment.traitCollection.horizontalSizeClass == layoutEnvironment.traitCollection.verticalSizeClass {
-                width = NSCollectionLayoutDimension.fractionalWidth(0.6)
-                height = NSCollectionLayoutDimension.fractionalWidth(0.375)
+            switch self.identifiers[sectionIndex] {
+            case .infoCell, .actionCell:
+                return self.createListLayout(layoutEnvironment)
+            case .mapCell:
+                return self.createDefaultLayout(withAspectRatio: 1, for: layoutEnvironment)
+            default:
+                return self.createDefaultLayout(withAspectRatio: 0.625, for: layoutEnvironment)
             }
-            
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-            let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-            
-            let groupSize = NSCollectionLayoutSize(widthDimension: width, heightDimension: height)
-            let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [layoutItem])
-            
-            let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-            layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-            
-            return layoutSection
         }
+        
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 30
+        layout.configuration = config
         
         return layout
     }
     
-    func createImageLayout(_ layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        var width = NSCollectionLayoutDimension.fractionalWidth(1)
-        var height = NSCollectionLayoutDimension.fractionalWidth(0.625)
+    func createDefaultLayout(withAspectRatio aspectRatio: Double, for layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        let width = NSCollectionLayoutDimension.fractionalWidth(1)
+        var height = NSCollectionLayoutDimension.fractionalWidth(CGFloat(aspectRatio))
+        var padding: CGFloat = 10
         
-//        if layoutEnvironment.traitCollection.horizontalSizeClass == layoutEnvironment.traitCollection.verticalSizeClass {
-//            width = NSCollectionLayoutDimension.fractionalWidth(0.6)
-//            height = NSCollectionLayoutDimension.fractionalWidth(0.375)
-//        }
+        if layoutEnvironment.traitCollection.horizontalSizeClass == layoutEnvironment.traitCollection.verticalSizeClass {
+            height = NSCollectionLayoutDimension.fractionalWidth(CGFloat(0.6 * aspectRatio))
+            padding = NSCollectionLayoutDimension.fractionalWidth(0.2).dimension
+        }
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: width, heightDimension: height)
         let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [layoutItem])
+        layoutGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: padding, bottom: 0, trailing: padding)
         
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-        layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        
+        return layoutSection
+    }
+    
+    func createListLayout(_ layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        var width: CGFloat = 0.85
+        var padding: CGFloat = 10
+        var itemPadding: CGFloat = 5
+        
+        if layoutEnvironment.traitCollection.horizontalSizeClass == layoutEnvironment.traitCollection.verticalSizeClass {
+            width = 0.51
+            padding = NSCollectionLayoutDimension.fractionalWidth(0.245).dimension
+            itemPadding = 15
+        }
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(44))
+        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: itemPadding, bottom: 0, trailing: itemPadding)
+        
+        let groupWidth = layoutEnvironment.container.contentSize.width * width
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(groupWidth), heightDimension: .absolute(220))
+        let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [layoutItem])
+        
+        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+        let sectionSideInset = (layoutEnvironment.container.contentSize.width - groupWidth) / 2
+        layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: sectionSideInset, bottom: 0, trailing: sectionSideInset)
+        layoutSection.orthogonalScrollingBehavior = .groupPaging
+        //        layoutSection.decorationItems = [NSCollectionLayoutDecorationItem.background(elementKind: "Card Background")]
         
         return layoutSection
     }
@@ -112,8 +142,49 @@ class DetailViewController: UICollectionViewController {
         
     }
     
-    @objc func optionsTapped() {
+    @objc func optionsTapped(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: "Options", message: nil, preferredStyle: .actionSheet)
+        for action in ActionCell.actions {
+            var title = action.rawValue
+            var style = UIAlertAction.Style.default
+                
+            if action == .bookmark {
+                title = "\((recent.bookmarked) ? "Remove from" : "Add to") Bookmarks"
+            } else if action == .delete {
+                style = .destructive
+            }
+            
+            alertController.addAction(UIAlertAction(title: title,
+                                                    style: style,
+                                                    handler: { _ in self.action(performed: action)}))
+        }
         
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.barButtonItem = sender
+        }
+        
+        self.present(alertController, animated: true)
+    }
+    
+    @objc func bookmarkDidChange() {
+        guard let section = identifiers.firstIndex(of: .actionCell),
+            let row = ActionCell.actions.firstIndex(of: .bookmark)  else {
+            return
+        }
+        
+        let indexPath = IndexPath(row: row, section: section)
+        if let cell = collectionView.cellForItem(at: indexPath) as? ActionCell {
+            UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseOut], animations: {
+                cell.alpha = 0
+            }) { (completed) in
+                cell.configure(with: self.recent, for: indexPath)
+                UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseOut], animations: {
+                    cell.alpha = 1
+                })
+            }
+        }
     }
     
 }
@@ -121,22 +192,67 @@ class DetailViewController: UICollectionViewController {
 extension DetailViewController {
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        cells.count
+        identifiers.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch cells[section].reuseIdentifier {
+        switch identifiers[section] {
+        case .infoCell:
+            return 5
+        case .actionCell:
+            return ActionCell.actions.count
         default:
             return 1
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cells[indexPath.section].reuseIdentifier, for: indexPath) as! SelfConfiguringCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cells[identifiers[indexPath.section]]!.reuseIdentifier,
+                                                      for: indexPath) as! SelfConfiguringCell
         
         cell.configure(with: recent, for: indexPath)
         
         return cell as! UICollectionViewCell
+    }
+    
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        print("\(Date()) \(URL(fileURLWithPath: #file).deletingPathExtension().lastPathComponent).\(#function)")
+        
+        let cell = collectionView.cellForItem(at: indexPath)
+        
+        switch identifiers[indexPath.section] {
+        case .actionCell:
+            animate(cell: cell)
+            action(performed: ActionCell.actions[indexPath.row])
+        default:
+            break
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        (cell as! SelfConfiguringCell).deconfigure()
+    }
+    
+    func animate(cell: UICollectionViewCell?) {
+        UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseOut], animations: {
+            cell?.backgroundColor = .listCellSelectedBackground
+        }) { (completed) in
+            UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseOut], animations: {
+                cell?.backgroundColor = .systemBackground
+            })
+        }
+    }
+    
+    func action(performed action: ActionCell.Action) {
+        switch action {
+        case .bookmark:
+            recent.toggleBookmark()
+        default:
+            break
+        }
     }
     
 }
