@@ -58,11 +58,14 @@ class DetailViewController: UICollectionViewController {
         super.viewWillAppear(animated)
         
         NotificationCenter.default.addObserver(self, selector: #selector(bookmarkDidChange), name: Recent.bookmarkDidChange, object: recent)
+        NotificationCenter.default.addObserver(self, selector: #selector(addressDidChange), name: Location.addressDidChange, object: recent.location)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
         NotificationCenter.default.removeObserver(self, name: Recent.bookmarkDidChange, object: recent)
+        NotificationCenter.default.removeObserver(self, name: Location.addressDidChange, object: recent?.location)
     }
     
     func createLayout() -> UICollectionViewLayout {
@@ -168,23 +171,37 @@ class DetailViewController: UICollectionViewController {
         self.present(alertController, animated: true)
     }
     
+    func reload(cellAtIndexPath indexPath: IndexPath?) {
+        guard let indexPath = indexPath,
+            let cell = collectionView.cellForItem(at: indexPath) else {
+            return
+        }
+        
+        UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseOut], animations: {
+            cell.alpha = 0
+        }) { (completed) in
+            (cell as? SelfConfiguringCell)?.configure(with: self.recent, for: indexPath)
+            UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseOut], animations: {
+                cell.alpha = 1
+            })
+        }
+    }
+    
     @objc func bookmarkDidChange() {
         guard let section = identifiers.firstIndex(of: .actionCell),
             let row = ActionCell.actions.firstIndex(of: .bookmark)  else {
             return
         }
         
-        let indexPath = IndexPath(row: row, section: section)
-        if let cell = collectionView.cellForItem(at: indexPath) as? ActionCell {
-            UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseOut], animations: {
-                cell.alpha = 0
-            }) { (completed) in
-                cell.configure(with: self.recent, for: indexPath)
-                UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseOut], animations: {
-                    cell.alpha = 1
-                })
-            }
+        reload(cellAtIndexPath: IndexPath(row: row, section: section))
+    }
+    
+    @objc func addressDidChange() {
+        guard let section = identifiers.firstIndex(of: .infoCell)  else {
+            return
         }
+        
+        reload(cellAtIndexPath: IndexPath(row: 4, section: section))
     }
     
 }

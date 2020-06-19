@@ -101,15 +101,21 @@ class RecentCell: CardCell, SelfConfiguringCell {
         bookmarkBtn.setImage((recent.bookmarked) ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
         
         NotificationCenter.default.addObserver(self, selector: #selector(bookmarkDidChange), name: Recent.bookmarkDidChange, object: recent)
+        NotificationCenter.default.addObserver(self, selector: #selector(addressDidChange), name: Location.addressDidChange, object: recent.location)
     }
     
     func deconfigure() {
         NotificationCenter.default.removeObserver(self, name: Recent.bookmarkDidChange, object: recent)
+        NotificationCenter.default.removeObserver(self, name: Location.addressDidChange, object: recent?.location)
     }
     
     @objc func bookmarkDidChange() {
-        bookmarkBtn.setImage((recent?.bookmarked ?? false) ?
+        bookmarkBtn.setImage((recent!.bookmarked ?? false) ?
             UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
+    }
+    
+    @objc func addressDidChange() {
+        subtitle.text = recent!.location?.description
     }
     
     @objc func bookmarkBtnTapped() {

@@ -11,6 +11,8 @@ import CoreLocation
 
 class Location: Codable, CustomStringConvertible {
     
+    static let addressDidChange =  Notification.Name("locationAddressDidChange")
+    
     enum CodingKeys: String, CodingKey {
         case lat, long, altitude
     }
@@ -18,10 +20,24 @@ class Location: Codable, CustomStringConvertible {
     var lat: Double
     var long: Double
     var altitude: Double
-    private(set) var address: String?
+    private(set) var address: String? {
+        didSet {
+            NotificationCenter.default.post(name: Location.addressDidChange, object: self)
+        }
+    }
+    private var performAddressLookup = true
     
     var description: String {
-        "\(latString), \(longString), \(altString)"
+        if let address = address {
+            return address
+        } else {
+            if performAddressLookup {
+                lookupCurrentLocation()
+                performAddressLookup = false
+            }
+            
+            return "\(latString), \(longString), \(altString)"
+        }
     }
     
     var latString: String {
@@ -76,6 +92,25 @@ class Location: Codable, CustomStringConvertible {
         try container.encode(lat, forKey: .lat)
         try container.encode(long, forKey: .long)
         try container.encode(altitude, forKey: .altitude)
+    }
+    
+    func lookupCurrentLocation(withCompletion completionHandler: ((String?) -> Void)? = nil) {
+        let geocoder = CLGeocoder()
+        
+        geocoder.reverseGeocodeLocation(clLocation, preferredLocale: .autoupdatingCurrent) { placemarks, error in
+            guard error == nil else {
+                print(error!.localizedDescription)
+                completionHandler?(nil)
+                return
+            }
+            
+            let placemark = placemarks?.first
+            let addressComponents = [placemark?.name, placemark?.locality, placemark?.administrativeArea]
+            let addressComponentsUnwrapped  = addressComponents.filter { $0 != nil }.map { $0! }
+            self.address = addressComponentsUnwrapped.joined(separator: ", ")
+            
+            completionHandler?(self.address)
+        }
     }
     
 }
