@@ -8,12 +8,13 @@
 
 import UIKit
 
-class ImageCell: CardCell, SelfConfiguringCell {
+class ImageCell: CardCell, SelfConfiguringPredictionCell {
     
 //    MARK: Class Constants
     static let reuseIdentifier = "ImageCell"
     
 //    MARK: UI Variables
+    var recent: Recent?
     let imageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -38,11 +39,19 @@ class ImageCell: CardCell, SelfConfiguringCell {
     }
     
     func configure(with recent: Recent, for indexPath: IndexPath) {
+        self.recent = recent
+        
         imageView.image = recent.prediction.image ?? recent.prediction.defaultImage
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(imageDidChange), name: Prediction.imageDidChange, object: recent.prediction)
     }
     
     func deconfigure() {
-        
+        NotificationCenter.default.removeObserver(self, name: Prediction.imageDidChange, object: recent?.prediction)
+    }
+    
+    @objc func imageDidChange() {
+        imageView.image = recent?.prediction.image ?? recent?.prediction.defaultImage
     }
     
 }

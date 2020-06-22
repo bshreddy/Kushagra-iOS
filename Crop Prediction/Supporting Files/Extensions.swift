@@ -49,14 +49,6 @@ extension Bundle {
     
 }
 
-//extension Array {
-//    
-//    subscript(_ indexPath: IndexPath) -> Element {
-//        self[indexPath.section]
-//    }
-//    
-//}
-
 extension Array where Element: Collection, Element.Index == Int {
     
     subscript(_ indexPath: IndexPath) -> Element.Iterator.Element {
@@ -168,19 +160,19 @@ extension UIColor {
 
 extension FileManager {
     
-//    func clearTempDirectory() {
-//        do {
-//            if let tempDir = Recent.reportTempDirectory {
-//                let tempFiles = try contentsOfDirectory(atPath: tempDir.path)
-//
-//                try tempFiles.forEach { filePath in
-//                    try removeItem(at: tempDir.appendingPathComponent(filePath))
-//                }
-//            }
-//        } catch {
-//            print(error)
-//        }
-//    }
+    func clearTempDirectory() {
+        do {
+            if let tempDir = Recent.reportTempDirectory {
+                let tempFiles = try contentsOfDirectory(atPath: tempDir.path)
+                
+                try tempFiles.forEach { filePath in
+                    try removeItem(at: tempDir.appendingPathComponent(filePath))
+                }
+            }
+        } catch {
+            print(error)
+        }
+    }
     
 }
 
@@ -192,6 +184,14 @@ extension UICollectionViewCell {
         }
         
         return CGFloat(defVal)
+    }
+    
+}
+
+extension UISplitViewController {
+    
+    var isDetailsVisible: Bool {
+        viewControllers.count == 2
     }
     
 }

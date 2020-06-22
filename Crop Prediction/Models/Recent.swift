@@ -7,10 +7,42 @@
 //
 
 import Foundation
+import UIKit
+import FirebaseUI
+import FirebaseStorage
 
 class Recent: Codable {
     
     static let bookmarkDidChange =  Notification.Name("recentBookmarkDidChange")
+    
+    static let reportTempDirectory: URL? = {
+        let tempDir = FileManager.default.temporaryDirectory
+            .appendingPathComponent("com.project.CropPrediction", isDirectory: true)
+            .appendingPathComponent("reports", isDirectory: true)
+        
+        do {
+            if !FileManager.default.fileExists(atPath: tempDir.path) {
+                try FileManager.default.createDirectory(at: tempDir, withIntermediateDirectories: true, attributes: nil)
+            }
+        
+            return tempDir
+        } catch {
+            print(error)
+        }
+        
+        return nil
+    }()
+    static let picturesDirectory: URL = {
+        let picDir = FileManager.default.urls(for: .picturesDirectory, in: .userDomainMask).first!
+            .appendingPathComponent("com.project.CropPrediction", isDirectory: true)
+            .appendingPathComponent("recents", isDirectory: true)
+        
+        if !FileManager.default.fileExists(atPath: picDir.path) {
+            try? FileManager.default.createDirectory(at: picDir, withIntermediateDirectories: true, attributes: nil)
+        }
+        
+        return picDir
+    }()
     
     var id: ID?
     var prediction: Prediction
@@ -57,6 +89,28 @@ class Recent: Codable {
     
     func toggleBookmark() {
         bookmarked.toggle()
+    }
+    
+    func loadImage(user: User, recentImagesRef: StorageReference,
+                   withCompletion completionHandler: @escaping ((_ image: UIImage?) -> Void) = { _ in }) {
+        let imgName = "\(prediction.predictedClass)/\(user.uid)-\(id!).png"
+        let imgURL = Recent.picturesDirectory.appendingPathComponent(imgName)
+            
+        if let image = UIImage(contentsOfFile: imgURL.path) {
+            self.prediction.image = image
+            completionHandler(image)
+        } else {
+            recentImagesRef.child(imgName).write(toFile: imgURL) { url, error in
+                guard error == nil, let url = url, let data = try? Data(contentsOf: url) else {
+                    print(error?.localizedDescription ?? "Error While Reading Image")
+                    completionHandler(nil)
+                    return
+                }
+                let image = UIImage(data: data)
+                self.prediction.image = image
+                completionHandler(image)
+            }
+        }
     }
     
 }

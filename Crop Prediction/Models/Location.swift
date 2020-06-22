@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 
 class Location: Codable, CustomStringConvertible {
     
@@ -110,6 +111,26 @@ class Location: Codable, CustomStringConvertible {
             self.address = addressComponentsUnwrapped.joined(separator: ", ")
             
             completionHandler?(self.address)
+        }
+    }
+    
+    func getMapAsImage(withCompletion completionHandler: @escaping MKMapSnapshotter.CompletionHandler) {
+        let mapSnapshotOptions = MKMapSnapshotter.Options()
+        
+        let cord = clLocation.coordinate
+        let region = MKCoordinateRegion(center: cord, latitudinalMeters: 500, longitudinalMeters: 500)
+        mapSnapshotOptions.region = region
+        
+        mapSnapshotOptions.scale = UIScreen.main.scale
+        mapSnapshotOptions.size = CGSize(width: 1024, height: 720)
+
+        mapSnapshotOptions.mapType = .hybrid
+        mapSnapshotOptions.pointOfInterestFilter = .excludingAll
+        mapSnapshotOptions.showsBuildings = false
+        
+        let snapShotter = MKMapSnapshotter(options: mapSnapshotOptions)
+        snapShotter.start { snapshot, error in
+            completionHandler(snapshot, error)
         }
     }
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RecentCell: CardCell, SelfConfiguringCell {
+class RecentCell: CardCell, SelfConfiguringPredictionCell {
     
 //    MARK: Class Constants
     static let reuseIdentifier = "RecentCell"
@@ -95,23 +95,28 @@ class RecentCell: CardCell, SelfConfiguringCell {
         
         title.text = recent.prediction.predictedName
         subtitle.text = recent.location?.description
-        imageView.image = recent.prediction.defaultImage
+        imageView.image = recent.prediction.image ?? recent.prediction.defaultImage
         bookmark = recent.bookmarked
-        
         bookmarkBtn.setImage((recent.bookmarked) ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
         
         NotificationCenter.default.addObserver(self, selector: #selector(bookmarkDidChange), name: Recent.bookmarkDidChange, object: recent)
+        NotificationCenter.default.addObserver(self, selector: #selector(imageDidChange), name: Prediction.imageDidChange, object: recent.prediction)
         NotificationCenter.default.addObserver(self, selector: #selector(addressDidChange), name: Location.addressDidChange, object: recent.location)
     }
     
     func deconfigure() {
         NotificationCenter.default.removeObserver(self, name: Recent.bookmarkDidChange, object: recent)
+        NotificationCenter.default.removeObserver(self, name: Prediction.imageDidChange, object: recent?.prediction)
         NotificationCenter.default.removeObserver(self, name: Location.addressDidChange, object: recent?.location)
     }
     
     @objc func bookmarkDidChange() {
-        bookmarkBtn.setImage((recent!.bookmarked ?? false) ?
+        bookmarkBtn.setImage((recent!.bookmarked) ?
             UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark"), for: .normal)
+    }
+    
+    @objc func imageDidChange() {
+        imageView.image = recent?.prediction.image ?? recent?.prediction.defaultImage
     }
     
     @objc func addressDidChange() {

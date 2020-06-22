@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>648831909162-f1eg02mod4lu212tnuntocbvr66db8cn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.648831909162-f1eg02mod4lu212tnuntocbvr66db8cn</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>648831909162-phm9elfrlf8f7t00icpmbht4qs9uqg2o.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAGLUu2ERohQhdwa3bzcpoiHUuJohMFqJE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>648831909162</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.project.Kushagra</string>
+	<key>PROJECT_ID</key>
+	<string>rurathon-cvr-2019</string>
+	<key>STORAGE_BUCKET</key>
+	<string>rurathon-cvr-2019.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:648831909162:ios:44c6aab233ad7d614f3253</string>
+	<key>DATABASE_URL</key>
+	<string>https://rurathon-cvr-2019.firebaseio.com</string>
+</dict>
+</plist>

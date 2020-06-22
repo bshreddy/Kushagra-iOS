@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapCell: CardCell, SelfConfiguringCell {
+class MapCell: CardCell, SelfConfiguringPredictionCell {
 
 //    MARK: Class Variables
     static let reuseIdentifier = "MapCell"
@@ -24,7 +24,7 @@ class MapCell: CardCell, SelfConfiguringCell {
         mapView.clipsToBounds = true
         mapView.isUserInteractionEnabled = false
         mapView.mapType = .hybrid
-        mapView.pointOfInterestFilter = .none
+        mapView.pointOfInterestFilter = .excludingAll
         mapView.showsTraffic = false
         mapView.showsBuildings = false
         mapView.showsCompass = true

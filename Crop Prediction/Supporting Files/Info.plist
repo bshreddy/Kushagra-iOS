@@ -16,6 +16,17 @@
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.648831909162-f1eg02mod4lu212tnuntocbvr66db8cn</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -55,6 +66,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -62,5 +78,15 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow Camera access to be able to detect Crops and Diseases</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Allow access to your location for getting accurate analysis</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Allow access to your location for getting accurate analysis</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Allow access to Photo Library to save Images</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow access to Photo Library to save Images</string>
 </dict>
 </plist>

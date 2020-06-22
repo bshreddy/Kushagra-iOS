@@ -40,6 +40,8 @@ class Prediction: Codable, CustomStringConvertible {
         case kind = "kind"
     }
     
+    static let imageDidChange =  Notification.Name("predictionImageDidChange")
+    
     private static var classes: [Kind: [String]] = {
         let classes = Bundle.main.decode([String: [String]].self, from: "Classes.json")
         return [Kind.crop: classes[Kind.crop.rawValue]!,
@@ -49,7 +51,11 @@ class Prediction: Codable, CustomStringConvertible {
     private static let URLs = [Kind.crop: ServerURL.appendingPathComponent("crop"),
                                .disease: ServerURL.appendingPathComponent("disease")]
     
-    var image: UIImage?
+    var image: UIImage? {
+        didSet {
+            NotificationCenter.default.post(name: Prediction.imageDidChange, object: self)
+        }
+    }
     private(set) var predictedIdx: Int
     private(set) var confidences: [Float]
     private(set) var kind: Kind
@@ -89,6 +95,35 @@ class Prediction: Codable, CustomStringConvertible {
         try container.encode(predictedIdx, forKey: .predicted_idx)
         try container.encode(confidences, forKey: .confidences)
         try container.encode(kind.rawValue, forKey: .kind)
+    }
+    
+    static func predict(kindOf kind: Kind, from image: UIImage, withCompletion completionHandler: @escaping (_ prediction: Prediction?) -> Void) {
+        let filename = "cropimage.png"
+        let boundary = UUID().uuidString
+        
+        var request = URLRequest(url: URLs[kind]!)
+        request.httpMethod = "POST"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
+        var data = Data()
+        
+        data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+        data.append("Content-Disposition: form-data; name=\"img\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
+        data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
+        data.append(image.pngData()!)
+        data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+        
+        URLSession.shared.uploadTask(with: request, from: data) { data, response, error in
+            guard let data = data else {
+                print(error?.localizedDescription ?? "Unknown Error")
+                completionHandler(nil)
+                return
+            }
+            
+            let prediction = try? JSONDecoder().decode(Prediction.self, from: data)
+            prediction?.image = image
+            completionHandler(prediction)
+        }.resume()
     }
     
 }

@@ -11,7 +11,7 @@
         <!--Disease-->
         <scene sceneID="XqE-3f-5Yp">
             <objects>
-                <splitViewController storyboardIdentifier="UISplitViewController-gDO-ua-ARO" id="gDO-ua-ARO" customClass="PredictionSplitViewController" customModule="Crop_Prediction" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController storyboardIdentifier="UISplitViewController-gDO-ua-ARO" id="gDO-ua-ARO" customClass="PredictionSplitViewController" customModule="Kushagra" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Disease" image="ant.fill" catalog="system" id="EE6-IQ-LTr"/>
                     <connections>
                         <segue destination="zGr-om-3DJ" kind="relationship" relationship="masterViewController" id="UhQ-4i-665"/>
@@ -25,7 +25,7 @@
         <!--Detail View Controller-->
         <scene sceneID="b0g-OY-naR">
             <objects>
-                <collectionViewController id="USC-Qj-0Lp" customClass="DetailViewController" customModule="Crop_Prediction" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="USC-Qj-0Lp" customClass="DetailViewController" customModule="Kushagra" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="6Tn-jE-qti">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -52,10 +52,100 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="QCg-Gi-ooY"/>
+                    <connections>
+                        <segue destination="JUv-yT-GWk" kind="showDetail" identifier="Show Image" id="m2b-dt-f3F"/>
+                        <segue destination="FNL-eO-8Vx" kind="showDetail" identifier="Show Map" id="HFj-F5-HgA"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aoy-aJ-sey" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="739" y="520"/>
+            <point key="canvasLocation" x="1641" y="520"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="EEV-zY-stn">
+            <objects>
+                <viewController id="FNL-eO-8Vx" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="N3X-58-0LK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="gUR-um-Fng"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iz1-JG-MNv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1641" y="1229"/>
+        </scene>
+        <!--Report-->
+        <scene sceneID="qBW-vO-k0p">
+            <objects>
+                <viewController storyboardIdentifier="ReportViewController" id="ZFy-oh-zGo" customClass="ReportViewController" customModule="Kushagra" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3hd-TA-4R3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Oj-Tq-1je">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DgT-FT-vfq" customClass="PDFView">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="t1R-O9-JbI" firstAttribute="bottom" secondItem="3Oj-Tq-1je" secondAttribute="bottom" id="Bn5-fs-WAL"/>
+                            <constraint firstItem="DgT-FT-vfq" firstAttribute="leading" secondItem="t1R-O9-JbI" secondAttribute="leading" id="EW7-mF-abe"/>
+                            <constraint firstItem="DgT-FT-vfq" firstAttribute="top" secondItem="t1R-O9-JbI" secondAttribute="top" id="Ieb-5b-tJS"/>
+                            <constraint firstItem="3Oj-Tq-1je" firstAttribute="leading" secondItem="t1R-O9-JbI" secondAttribute="leading" id="JTo-IH-7vT"/>
+                            <constraint firstItem="t1R-O9-JbI" firstAttribute="trailing" secondItem="DgT-FT-vfq" secondAttribute="trailing" id="W52-1A-dHy"/>
+                            <constraint firstItem="3Oj-Tq-1je" firstAttribute="top" secondItem="t1R-O9-JbI" secondAttribute="top" id="itX-9v-Kdr"/>
+                            <constraint firstItem="t1R-O9-JbI" firstAttribute="bottom" secondItem="DgT-FT-vfq" secondAttribute="bottom" id="j8v-MQ-Ykg"/>
+                            <constraint firstItem="t1R-O9-JbI" firstAttribute="trailing" secondItem="3Oj-Tq-1je" secondAttribute="trailing" id="t7N-Ik-fGh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="t1R-O9-JbI"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Report" largeTitleDisplayMode="never" id="EVB-4T-elX">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="zTC-cR-e8r">
+                            <connections>
+                                <action selector="cancelTapped:" destination="ZFy-oh-zGo" id="tgg-p3-nnB"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Export" id="VOi-zO-moV">
+                            <connections>
+                                <action selector="exportBtnTapped:" destination="ZFy-oh-zGo" id="qDo-p8-o3B"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="exportBtn" destination="VOi-zO-moV" id="Xj5-Qg-kxl"/>
+                        <outlet property="pdfView" destination="DgT-FT-vfq" id="X7u-9W-fN1"/>
+                        <outlet property="webView" destination="3Oj-Tq-1je" id="B03-BG-xte"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yJY-AJ-W1z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3444.9275362318845" y="1228.7946428571429"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="TE5-wC-4ca">
+            <objects>
+                <viewController id="JUv-yT-GWk" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ysV-50-PCq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="SrI-np-BQQ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UZ1-tL-ROc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2536" y="520"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AiH-fT-xmY">
@@ -76,7 +166,7 @@
         <!--My Crops-->
         <scene sceneID="ZIO-hO-tOH">
             <objects>
-                <collectionViewController id="4Dh-qh-Syd" customClass="MasterViewController" customModule="Crop_Prediction" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="4Dh-qh-Syd" customClass="MasterViewController" customModule="Kushagra" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="vNX-Lw-a4L">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -127,12 +217,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j4r-XD-Hsr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1641" y="520"/>
+            <point key="canvasLocation" x="739" y="520"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="bqi-fn-F7r">
             <objects>
-                <viewController id="vyp-fn-sTK" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Empty Detail" id="vyp-fn-sTK" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="70r-at-4Lh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -147,7 +237,7 @@
         <!--Crop-->
         <scene sceneID="qY2-lc-kU9">
             <objects>
-                <splitViewController storyboardIdentifier="UISplitViewController-bbH-S9-c9E" id="bbH-S9-c9E" customClass="PredictionSplitViewController" customModule="Crop_Prediction" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController storyboardIdentifier="UISplitViewController-bbH-S9-c9E" id="bbH-S9-c9E" customClass="PredictionSplitViewController" customModule="Kushagra" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Crop" image="leaf.arrow.circlepath" catalog="system" id="xoV-mi-XDn"/>
                     <connections>
                         <segue destination="zGr-om-3DJ" kind="relationship" relationship="masterViewController" id="3Lv-14-UE3"/>
@@ -157,6 +247,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Csb-YG-sZb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-178" y="-200"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="522-eU-1fY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GbC-18-f9U" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eQv-HR-4wl">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZFy-oh-zGo" kind="relationship" relationship="rootViewController" id="gXg-7c-Xe0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0GY-ch-3BV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2534.7826086956525" y="1228.7946428571429"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

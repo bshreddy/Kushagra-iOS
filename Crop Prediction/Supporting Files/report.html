@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, shrink-to-fit=YES">
+        <title>Report</title>
+
+        <style>
+            html {
+                margin: 0pt;
+            }
+
+            body {
+                margin: 10pt;
+                font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Roboto, sans-serif;
+                font-size: 12pt;
+
+                display: flex;
+                flex-direction: column;
+
+                width: 595pt;
+                height: 842pt;
+            }
+
+            h1, h2, h3, h4, h5, h6, p {
+                margin: 0pt;
+                font-weight: 400;
+            }
+
+            hr {
+                width: 100%;
+                border: 0;
+                border-bottom: 1pt solid rgba(0, 0, 0, 0.4);
+                margin: 5pt 0pt 10pt 0pt;
+            }
+
+            .large-title {
+                font-size: 26pt;
+            }
+
+            h1, .title-1 {
+                font-size: 23pt;
+                font-weight: 200;
+            }
+
+            h2, .title-2 {
+                font-size: 17pt;
+            }
+
+            h3, .title-3 {
+                font-size: 15pt;
+            }
+
+            h4, .headline {
+                font-size: 12pt;
+                font-weight: 600;
+            }
+
+            h5, .callout {
+                font-size: 11pt;
+            }
+
+            h6, .subhead {
+                font-size: 10pt;
+            }
+
+            footer, .footer {
+                font-size: 8pt;
+                color: rgba(0, 0, 0, 0.6);
+                text-align: right;
+                border-top: 1pt solid rgba(0, 0, 0, 0.2);
+            }
+
+            .mdc-card {
+                border-radius: 4pt;
+                background-color: #fff;
+                background-color: var(--mdc-theme-surface, #fff);
+                position: relative;
+                box-shadow: 0pt 2pt 1pt -1pt rgba(0, 0, 0, 0.2), 0pt 1pt 1pt 0pt rgba(0, 0, 0, 0.14), 0pt 1pt 3pt 0pt rgba(0, 0, 0, 0.12);
+                display: flex;
+                flex-direction: column;
+                box-sizing: border-box;
+                -webkit-print-color-adjust:exact;
+                -webkit-filter:opacity(1);
+            }
+
+            .mdc-elevation--z4 {
+                box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+                -webkit-print-color-adjust:exact;
+                -webkit-filter:opacity(1);
+            }
+
+            .report-title {
+                margin-left: 30pt;
+            }
+
+            .content {
+                display: flex;
+                flex-grow: 1;
+                flex-direction: column;
+                padding: 10pt 0pt;
+            }
+
+            .content-row-first {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .crop-image {
+                margin: 10pt;
+                max-height: 285pt;
+                width: 380pt;
+                border-radius: 10pt;
+                
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                position: relative;
+            }
+
+            .crop-info {
+                width: 173pt;
+                margin: 10pt;
+                padding: 10pt 20pt;
+                display: flex;
+            }
+
+            dl {
+                margin: auto 0pt;
+                flex-direction: column;
+            }
+
+            dt, dd {
+                margin: 0;
+            }
+
+            dt {
+                margin-bottom: 5pt;
+            }
+
+            dt:after {
+                content: ':'
+            }
+
+            dd {
+                text-align: right;
+                margin-bottom: 15pt;
+                padding-left: 20pt;
+                padding-bottom: 5pt;
+                border-bottom: 1pt solid rgba(0, 0, 0, 0.1);
+
+                word-wrap: none;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            dd:last-of-type {
+                padding-bottom: 0pt;
+                margin-bottom: 0pt;
+                border-bottom: none;
+            }
+
+            .content-row-second {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .crop-addl-info {
+                width: 255pt;
+                margin: 10pt;
+                padding: 10pt 20pt;
+                display: flex;
+            }
+
+            .date-created {
+                margin: 10pt;
+                margin-top: 50pt;
+                padding: 10pt 20pt;
+                display: flex;
+            }
+
+            .map-image {
+                margin: 10pt;
+                border-radius: 10pt;
+            }
+
+            .map-image .image {
+                height: 300pt;
+                width: 300pt;
+                border-radius: 10pt;
+                
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                position: relative;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 class="report-title">Crop Prediction - Report</h1>
+        <hr>
+        <div class="content">
+            <div class="content-row-first">
+                <div class="crop-image mdc-elevation--z4" style="background-image: url(#CROP_IMAGE#);"></div>
+                <div class="mdc-card crop-info mdc-elevation--z4">
+                    <dl>
+                        <dt>Name</dt>
+                        <dd class="title-2">#NAME#</dd>
+                        <dt>Latitude</dt>
+                        <dd>#LAT#</dd>
+                        <dt>Logitude</dt>
+                        <dd>#LONG#</dd>
+                        <dt>Altitude</dt>
+                        <dd>#ALT#</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="content-row-second">
+                <div class="mdc-card crop-addl-info mdc-elevation--z4">
+                    <dl>
+<!--                        <dt>Type</dt>-->
+<!--                        <dd>Plantation</dd>-->
+<!--                        <dt>Techniques Used</dt>-->
+<!--                        <dd>Horticulture</dd>-->
+<!--                        <dt>Varieties</dt>-->
+<!--                        <dd>Arabica and Robusta</dd>-->
+<!--                        <dt>Temperature</dt>-->
+<!--                        <dd>16-28 ˚C</dd>-->
+<!--                        <dt>Rainfall</dt>-->
+<!--                        <dd>150-250 cm</dd>-->
+<!--                        <dt>Soil</dt>-->
+<!--                        <dd>150-250 cm</dd>-->
+<!--                        <dt>Major Producers</dt>-->
+<!--                        <dd>Karnataka, Tamil Nadu, Kerala, Andhra Pradesh, Telangana, Odisha, Assam, Meghalaya, Arunachal Pradesh, Manipur, Nagaland</dd>-->
+<!--                        <dt>Highest Producers</dt>-->
+<!--                        <dd>Karnataka</dd>-->
+                        #CROP_DETAILS#
+                    </dl>
+                </div>
+
+                <div class="map-image">
+                    <div class="image mdc-elevation--z4" style="background-image: url(#MAP_IMAGE#);"></div>
+                    <div class="mdc-card date-created mdc-elevation--z4">
+                        <dl>
+                            <dt>Date Created</dt>
+                            <dd>Wednesday, Feb 5, 2020</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer>
+            All Rights Reserved. Auto-generated by Crop Prediction App
+        </footer>
+    </body>
+</html>

@@ -62,7 +62,7 @@ class ListCell: UICollectionViewCell {
     
 }
 
-class DetailsTextCell: ListCell, SelfConfiguringCell {
+class DetailsTextCell: ListCell, SelfConfiguringPredictionCell {
     
     static var reuseIdentifier: String { "PredictionTextCell" }
     
@@ -106,7 +106,7 @@ class DetailsTextCell: ListCell, SelfConfiguringCell {
 }
 
 
-class ActionCell: ListCell, SelfConfiguringCell {
+class ActionCell: ListCell, SelfConfiguringPredictionCell {
     
     static var reuseIdentifier: String { "DetailsTextCell" }
     var recent: Recent?

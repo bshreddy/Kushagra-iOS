@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SelfConfiguringCell {
+protocol SelfConfiguringPredictionCell {
     static var reuseIdentifier: String { get }
     func configure(with recent: Recent, for indexPath: IndexPath)
     func deconfigure()

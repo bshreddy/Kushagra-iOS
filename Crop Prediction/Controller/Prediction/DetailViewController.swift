@@ -8,6 +8,14 @@
 
 import UIKit
 
+protocol DetailViewControllerDelegate: NSObject {
+    func save(recent: Recent)
+    func exportToPDF(recent: Recent)
+    func saveImageToPhotos(recent: Recent)
+    func saveMapToPhotos(recent: Recent)
+    func delete(recent: Recent)
+}
+
 class DetailViewController: UICollectionViewController {
     
     enum Identifier: String {
@@ -18,17 +26,16 @@ class DetailViewController: UICollectionViewController {
     }
     
 //    MARK: Class Variables
+    weak var delegate: DetailViewControllerDelegate?
     var isPresentedModelly = false
-    var mode: Prediction.Kind {
-        recent.prediction.kind
-    }
+    var mode: Prediction.Kind!
     
     var dataSource: UICollectionViewDiffableDataSource<Int, Int>!
     var identifiers: [Identifier] = [.imageCell, .infoCell, .mapCell, .actionCell]
-    var cells: [Identifier: (UICollectionViewCell & SelfConfiguringCell).Type] = [.imageCell: ImageCell.self,
-                                                                                  .infoCell: DetailsTextCell.self,
-                                                                                  .mapCell: MapCell.self,
-                                                                                  .actionCell: ActionCell.self]
+    var cells: [Identifier: (UICollectionViewCell & SelfConfiguringPredictionCell).Type] = [.imageCell: ImageCell.self,
+                                                                                            .infoCell: DetailsTextCell.self,
+                                                                                            .mapCell: MapCell.self,
+                                                                                            .actionCell: ActionCell.self]
     
 //    MARK: Model Variables
     var recent: Recent!
@@ -38,7 +45,7 @@ class DetailViewController: UICollectionViewController {
         
         if isPresentedModelly {
             navigationItem.title = "New \(mode.rawValue.capitalized) Detection"
-            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped(_:)))
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveTapped))
         } else {
             navigationItem.title = "\(mode.rawValue.capitalized) Details"
@@ -102,7 +109,7 @@ class DetailViewController: UICollectionViewController {
         
         let groupSize = NSCollectionLayoutSize(widthDimension: width, heightDimension: height)
         let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [layoutItem])
-        layoutGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: padding, bottom: 0, trailing: padding)
+        layoutGroup.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: padding, bottom: 0, trailing: padding)
         
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
         
@@ -137,12 +144,27 @@ class DetailViewController: UICollectionViewController {
         return layoutSection
     }
     
-    @objc func cancelTapped() {
+    @objc func cancelTapped(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: "Are you sure?", message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Save", style: .default) { _ in
+            self.saveTapped()
+        })
+        alertController.addAction(UIAlertAction(title: "Discard", style: .destructive) { _ in
+            alertController.dismiss(animated: true)
+            self.dismiss(animated: true)
+        })
+        alertController.addAction(UIAlertAction(title: "Close", style: .cancel))
         
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.barButtonItem = sender
+        }
+        
+        self.present(alertController, animated: true)
     }
     
     @objc func saveTapped() {
-        
+        self.dismiss(animated: true)
+        delegate?.save(recent: recent)
     }
     
     @objc func optionsTapped(_ sender: UIBarButtonItem) {
@@ -180,7 +202,7 @@ class DetailViewController: UICollectionViewController {
         UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseOut], animations: {
             cell.alpha = 0
         }) { (completed) in
-            (cell as? SelfConfiguringCell)?.configure(with: self.recent, for: indexPath)
+            (cell as? SelfConfiguringPredictionCell)?.configure(with: self.recent, for: indexPath)
             UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseOut], animations: {
                 cell.alpha = 1
             })
@@ -204,6 +226,14 @@ class DetailViewController: UICollectionViewController {
         reload(cellAtIndexPath: IndexPath(row: 4, section: section))
     }
     
+    func dismissView() {
+        if(splitViewController?.isDetailsVisible ?? false) {
+            navigationController?.navigationController?.popViewController(animated: true)
+        } else {
+            splitViewController?.showDetailViewController(storyboard!.instantiateViewController(identifier: "Empty Detail"), sender: self)
+        }
+    }
+    
 }
 
 extension DetailViewController {
@@ -225,7 +255,7 @@ extension DetailViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cells[identifiers[indexPath.section]]!.reuseIdentifier,
-                                                      for: indexPath) as! SelfConfiguringCell
+                                                      for: indexPath) as! SelfConfiguringPredictionCell
         
         cell.configure(with: recent, for: indexPath)
         
@@ -250,7 +280,7 @@ extension DetailViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        (cell as! SelfConfiguringCell).deconfigure()
+        (cell as! SelfConfiguringPredictionCell).deconfigure()
     }
     
     func animate(cell: UICollectionViewCell?) {
@@ -267,6 +297,20 @@ extension DetailViewController {
         switch action {
         case .bookmark:
             recent.toggleBookmark()
+        
+        case .exportToPDF:
+            delegate?.exportToPDF(recent: recent)
+        
+        case .saveImageToPhotos:
+            delegate?.saveImageToPhotos(recent: recent)
+        
+        case .saveMapToPhotos:
+            delegate?.saveMapToPhotos(recent: recent)
+        
+        case .delete:
+            dismissView()
+            delegate?.delete(recent: recent)
+        
         default:
             break
         }
