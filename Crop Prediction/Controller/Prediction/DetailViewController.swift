@@ -14,6 +14,7 @@ protocol DetailViewControllerDelegate: NSObject {
     func saveImageToPhotos(recent: Recent)
     func saveMapToPhotos(recent: Recent)
     func delete(recent: Recent)
+    func performed(action: ActionCell.Action, on recent: Recent)
 }
 
 class DetailViewController: UICollectionViewController {
@@ -27,11 +28,12 @@ class DetailViewController: UICollectionViewController {
     
 //    MARK: Class Variables
     weak var delegate: DetailViewControllerDelegate?
-    var isPresentedModelly = false
+    var isNew = false
+    var onlyBookmarked = false
     var mode: Prediction.Kind!
     
     var dataSource: UICollectionViewDiffableDataSource<Int, Int>!
-    var identifiers: [Identifier] = [.imageCell, .infoCell, .mapCell, .actionCell]
+    var identifiers: [Identifier] = [.imageCell, .infoCell, .mapCell]
     var cells: [Identifier: (UICollectionViewCell & SelfConfiguringPredictionCell).Type] = [.imageCell: ImageCell.self,
                                                                                             .infoCell: DetailsTextCell.self,
                                                                                             .mapCell: MapCell.self,
@@ -43,15 +45,19 @@ class DetailViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if isPresentedModelly {
+        if isNew {
             navigationItem.title = "New \(mode.rawValue.capitalized) Detection"
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped(_:)))
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveTapped))
         } else {
+            identifiers.append(.actionCell)
             navigationItem.title = "\(mode.rawValue.capitalized) Details"
             navigationController?.navigationBar.prefersLargeTitles = true
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),
                                                                 style: .plain, target: self, action: #selector(optionsTapped(_:)))
+            if onlyBookmarked {
+                navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped(_:)))
+            }
         }
         
         collectionView.collectionViewLayout = createLayout()
@@ -145,6 +151,10 @@ class DetailViewController: UICollectionViewController {
     }
     
     @objc func cancelTapped(_ sender: UIBarButtonItem) {
+        if onlyBookmarked {
+            self.dismiss(animated: true)
+        }
+        
         let alertController = UIAlertController(title: "Are you sure?", message: nil, preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Save", style: .default) { _ in
             self.saveTapped()
@@ -181,7 +191,11 @@ class DetailViewController: UICollectionViewController {
             
             alertController.addAction(UIAlertAction(title: title,
                                                     style: style,
-                                                    handler: { _ in self.action(performed: action)}))
+                                                    handler: { _ in
+                                                        if(action == .delete) { self.dismissView() }
+                                                        self.delegate?.performed(action: action, on: self.recent)
+                                                        
+            }))
         }
         
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -227,10 +241,26 @@ class DetailViewController: UICollectionViewController {
     }
     
     func dismissView() {
+        print("\(Date()) \(URL(fileURLWithPath: #file).deletingPathExtension().lastPathComponent).\(#function)")
         if(splitViewController?.isDetailsVisible ?? false) {
-            navigationController?.navigationController?.popViewController(animated: true)
-        } else {
             splitViewController?.showDetailViewController(storyboard!.instantiateViewController(identifier: "Empty Detail"), sender: self)
+        } else {
+            navigationController?.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "Show Image":
+            let destVC = segue.destination as! ImageViewController
+            destVC.image = recent.prediction.image!
+        
+        case "Show Map":
+            let destVC = segue.destination as! MapViewController
+            destVC.location = recent.location!
+            
+        default:
+            break
         }
     }
     
@@ -259,6 +289,13 @@ extension DetailViewController {
         
         cell.configure(with: recent, for: indexPath)
         
+        switch identifiers[indexPath.section] {
+        case .mapCell:
+            (cell as! MapCell).mapView.isUserInteractionEnabled = splitViewController?.isDetailsVisible ?? false
+        default:
+            break
+        }
+        
         return cell as! UICollectionViewCell
     }
     
@@ -266,14 +303,28 @@ extension DetailViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        print("\(Date()) \(URL(fileURLWithPath: #file).deletingPathExtension().lastPathComponent).\(#function)")
         
         let cell = collectionView.cellForItem(at: indexPath)
         
         switch identifiers[indexPath.section] {
+        case .imageCell:
+            if(!(splitViewController?.isDetailsVisible ?? false)) {
+                performSegue(withIdentifier: "Show Image", sender: indexPath)
+            }
+            
+        case .mapCell:
+            if(!(splitViewController?.isDetailsVisible ?? false)) {
+                performSegue(withIdentifier: "Show Map", sender: indexPath)
+            }
+            
         case .actionCell:
             animate(cell: cell)
-            action(performed: ActionCell.actions[indexPath.row])
+            if(ActionCell.actions[indexPath.row] == .delete) {
+                print("\(Date()) \(URL(fileURLWithPath: #file).deletingPathExtension().lastPathComponent).\(#function)")
+                dismissView()
+                
+            }
+            delegate?.performed(action: ActionCell.actions[indexPath.row], on: recent)
         default:
             break
         }
@@ -290,29 +341,6 @@ extension DetailViewController {
             UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseOut], animations: {
                 cell?.backgroundColor = .systemBackground
             })
-        }
-    }
-    
-    func action(performed action: ActionCell.Action) {
-        switch action {
-        case .bookmark:
-            recent.toggleBookmark()
-        
-        case .exportToPDF:
-            delegate?.exportToPDF(recent: recent)
-        
-        case .saveImageToPhotos:
-            delegate?.saveImageToPhotos(recent: recent)
-        
-        case .saveMapToPhotos:
-            delegate?.saveMapToPhotos(recent: recent)
-        
-        case .delete:
-            dismissView()
-            delegate?.delete(recent: recent)
-        
-        default:
-            break
         }
     }
     

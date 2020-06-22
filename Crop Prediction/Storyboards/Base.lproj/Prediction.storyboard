@@ -53,28 +53,13 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="QCg-Gi-ooY"/>
                     <connections>
-                        <segue destination="JUv-yT-GWk" kind="showDetail" identifier="Show Image" id="m2b-dt-f3F"/>
-                        <segue destination="FNL-eO-8Vx" kind="showDetail" identifier="Show Map" id="HFj-F5-HgA"/>
+                        <segue destination="JUv-yT-GWk" kind="show" identifier="Show Image" id="m2b-dt-f3F"/>
+                        <segue destination="GRn-zi-FiY" kind="show" identifier="Show Map" id="Z3S-Cd-WrB"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aoy-aJ-sey" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1641" y="520"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="EEV-zY-stn">
-            <objects>
-                <viewController id="FNL-eO-8Vx" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="N3X-58-0LK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="gUR-um-Fng"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Iz1-JG-MNv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1641" y="1229"/>
         </scene>
         <!--Report-->
         <scene sceneID="qBW-vO-k0p">
@@ -132,16 +117,50 @@
             </objects>
             <point key="canvasLocation" x="3444.9275362318845" y="1228.7946428571429"/>
         </scene>
-        <!--View Controller-->
+        <!--Image View Controller-->
         <scene sceneID="TE5-wC-4ca">
             <objects>
-                <viewController id="JUv-yT-GWk" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ysV-50-PCq">
+                <viewController id="JUv-yT-GWk" customClass="ImageViewController" customModule="Kushagra" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zef-a0-gwI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="MnY-dg-rYF">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a4I-nK-gvP">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <gestureRecognizers/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="a4I-nK-gvP" firstAttribute="centerX" secondItem="MnY-dg-rYF" secondAttribute="centerX" id="4C4-N8-JXs"/>
+                                    <constraint firstItem="a4I-nK-gvP" firstAttribute="leading" secondItem="MnY-dg-rYF" secondAttribute="leading" id="63w-Zh-QGt"/>
+                                    <constraint firstItem="a4I-nK-gvP" firstAttribute="centerY" secondItem="MnY-dg-rYF" secondAttribute="centerY" id="GGT-cF-31y"/>
+                                    <constraint firstAttribute="trailing" secondItem="a4I-nK-gvP" secondAttribute="trailing" id="PyW-Pz-bvb"/>
+                                    <constraint firstAttribute="bottom" secondItem="a4I-nK-gvP" secondAttribute="bottom" id="YN0-3g-xc8"/>
+                                    <constraint firstItem="a4I-nK-gvP" firstAttribute="top" secondItem="MnY-dg-rYF" secondAttribute="top" id="ZBd-Rl-Jmr"/>
+                                    <constraint firstItem="a4I-nK-gvP" firstAttribute="height" secondItem="MnY-dg-rYF" secondAttribute="height" priority="250" id="nId-bc-ZRb"/>
+                                    <constraint firstItem="a4I-nK-gvP" firstAttribute="width" secondItem="MnY-dg-rYF" secondAttribute="width" priority="250" id="t2O-is-Iah"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="1Pv-bE-j9r"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="KTi-5T-tNg"/>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="SrI-np-BQQ"/>
+                        <constraints>
+                            <constraint firstItem="MnY-dg-rYF" firstAttribute="leading" secondItem="Zef-a0-gwI" secondAttribute="leading" id="2hS-Nz-92K"/>
+                            <constraint firstItem="MnY-dg-rYF" firstAttribute="trailing" secondItem="Zef-a0-gwI" secondAttribute="trailing" id="4Xi-fT-Cvc"/>
+                            <constraint firstAttribute="bottom" secondItem="MnY-dg-rYF" secondAttribute="bottom" id="cDg-9Q-DMQ"/>
+                            <constraint firstItem="MnY-dg-rYF" firstAttribute="top" secondItem="Zef-a0-gwI" secondAttribute="top" id="dpf-Cr-Sve"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BCg-VJ-p3a"/>
                     </view>
+                    <navigationItem key="navigationItem" id="nYZ-aG-W5O"/>
+                    <connections>
+                        <outlet property="imageView" destination="a4I-nK-gvP" id="iDz-J3-4jA"/>
+                        <outlet property="scrollView" destination="MnY-dg-rYF" id="gRx-ld-sie"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UZ1-tL-ROc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -166,7 +185,7 @@
         <!--My Crops-->
         <scene sceneID="ZIO-hO-tOH">
             <objects>
-                <collectionViewController id="4Dh-qh-Syd" customClass="MasterViewController" customModule="Kushagra" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="HomeView" id="4Dh-qh-Syd" customClass="MasterViewController" customModule="Kushagra" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="vNX-Lw-a4L">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -265,6 +284,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0GY-ch-3BV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2534.7826086956525" y="1228.7946428571429"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="c9R-sb-54l">
+            <objects>
+                <viewController id="GRn-zi-FiY" customClass="MapViewController" customModule="Kushagra" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UV4-CL-zmk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="hybrid" pitchEnabled="NO" showsBuildings="NO" showsPointsOfInterest="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f59-K3-CWb">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="f59-K3-CWb" firstAttribute="top" secondItem="UV4-CL-zmk" secondAttribute="top" id="1kU-zd-Wab"/>
+                            <constraint firstItem="f59-K3-CWb" firstAttribute="leading" secondItem="UV4-CL-zmk" secondAttribute="leading" id="EHH-zK-c41"/>
+                            <constraint firstAttribute="trailing" secondItem="f59-K3-CWb" secondAttribute="trailing" id="OWW-RL-CVR"/>
+                            <constraint firstAttribute="bottom" secondItem="f59-K3-CWb" secondAttribute="bottom" id="j9b-si-gbl"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Eyd-a1-ol6"/>
+                    </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="3D0-9N-AQa"/>
+                    <connections>
+                        <outlet property="mapView" destination="f59-K3-CWb" id="kx1-Xx-FL2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nrN-j8-ezU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1640.5797101449277" y="1228.7946428571429"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

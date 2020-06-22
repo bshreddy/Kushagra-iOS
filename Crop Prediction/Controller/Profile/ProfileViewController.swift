@@ -67,7 +67,7 @@ class ProfileViewController: UICollectionViewController {
             
             var padding: CGFloat = 10
             
-            if layoutEnvironment.traitCollection.horizontalSizeClass == layoutEnvironment.traitCollection.verticalSizeClass {
+            if layoutEnvironment.traitCollection.horizontalSizeClass == .regular && layoutEnvironment.traitCollection.verticalSizeClass == .regular {
                 padding = NSCollectionLayoutDimension.fractionalWidth(0.3).dimension
             }
             
@@ -85,6 +85,7 @@ class ProfileViewController: UICollectionViewController {
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 30
         layout.configuration = config
+        layout.register(CardCell.self, forDecorationViewOfKind: "Card Background")
         
         return layout
     }
@@ -156,10 +157,10 @@ extension ProfileViewController {
         
         switch identifiers[indexPath] {
         case .bookmarksCell:
-             break
-//            let vc = UIStoryboard(name: "Prediction", bundle: .main).instantiateViewController(withIdentifier: "HomeView") as! HomeViewController
-//            vc.onlyBookmarked = true
-//            navigationController?.pushViewController(vc, animated: true)
+            let vc = UIStoryboard(name: "Prediction", bundle: .main)
+                .instantiateViewController(withIdentifier: "HomeView") as! MasterViewController
+             vc.onlyBookmarked = true
+             self.present(UINavigationController(rootViewController: vc), animated: true)
             
         case .serverAddrCell:
             let alert = UIAlertController(title: "Server Address",
@@ -179,8 +180,7 @@ extension ProfileViewController {
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
         
         case .helpCell:
-            break
-//            performSegue(withIdentifier: "Show Help", sender: indexPath)
+            performSegue(withIdentifier: "Show Help", sender: indexPath)
             
         case .tellCell:
             let message = "Hey,\n\nCrop Prediction App is an AI-powered, intuitive app that I use to identify my crops, " +

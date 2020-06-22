@@ -21,11 +21,11 @@ class CardCell: UICollectionViewCell {
         
         layer.shadowRadius = cornerRadius
         
-        layer.shadowColor = UIColor { traitCollection in
-            traitCollection.userInterfaceStyle == .light ? .lightGray : .clear
-        }.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 2.0)
-        layer.shadowOpacity = 0.6
+//        layer.shadowColor = UIColor { traitCollection in
+//            traitCollection.userInterfaceStyle == .light ? .lightGray : .clear
+//        }.cgColor
+//        layer.shadowOffset = CGSize(width: 0, height: 2.0)
+//        layer.shadowOpacity = 0.6
     }
     
     required init?(coder: NSCoder) {

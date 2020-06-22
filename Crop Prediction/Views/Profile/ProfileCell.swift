@@ -44,7 +44,6 @@ class ProfileCell: UICollectionViewCell, SelfConfiguringProfileCell {
         super.init(frame: frame)
         
         iconView.image = nil
-//        iconView.translatesAutoresizingMaskIntoConstraints = false
         iconView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         title.font = UIFont.preferredFont(forTextStyle: .body)
@@ -79,7 +78,7 @@ class ProfileCell: UICollectionViewCell, SelfConfiguringProfileCell {
     }
     
     func configure(for user: User?, with identifier: Identifier) {
-        if let user = user {
+        if let _ = user {
             title.text = cellTexts[identifier]!
             iconView.image = UIImage(systemName: cellIcons[identifier]!)
             iconView.tintColor = cellIconsTint[identifier]!

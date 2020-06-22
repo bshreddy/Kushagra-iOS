@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 func showErrorDialog(title: String = "An Error Occurred", message: String, presentingVC vc: UIViewController) {
     DispatchQueue.main.async {
@@ -187,6 +188,21 @@ extension UICollectionViewCell {
     }
     
 }
+
+extension MKMapView {
+    
+    func set(location: Location, _ range: Double) {
+        let loc = CLLocation(latitude: location.lat, longitude: location.long)
+        let coordinateRegion = MKCoordinateRegion(center: loc.coordinate, latitudinalMeters: range, longitudinalMeters: range)
+        setRegion(coordinateRegion, animated: false)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = loc.coordinate
+        addAnnotation(annotation)
+    }
+    
+}
+
 
 extension UISplitViewController {
     

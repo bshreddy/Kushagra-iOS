@@ -45,7 +45,9 @@ class MasterViewController: UICollectionViewController {
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         
-        print(Recent.picturesDirectory)
+        if onlyBookmarked {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped(_:)))
+        }
         
         collectionView.collectionViewLayout = createLayout()
         collectionView.register(RecentCell.self, forCellWithReuseIdentifier: RecentCell.reuseIdentifier)
@@ -109,8 +111,9 @@ class MasterViewController: UICollectionViewController {
             var width = NSCollectionLayoutDimension.fractionalWidth(1)
             var height = NSCollectionLayoutDimension.fractionalWidth(0.625)
             
-//            For non-plus iPhones in landscape
-            if layoutEnvironment.traitCollection.verticalSizeClass == .compact && layoutEnvironment.traitCollection.horizontalSizeClass == .compact {
+//            For non-plus iPhones in landscape and for bookmarks
+            if (layoutEnvironment.traitCollection.verticalSizeClass == .compact && layoutEnvironment.traitCollection.horizontalSizeClass == .compact)
+                || (self.onlyBookmarked && layoutEnvironment.traitCollection.horizontalSizeClass == .regular) {
                 width = .fractionalWidth(0.5)
                 height = .fractionalWidth(0.3125)
             }
@@ -118,19 +121,23 @@ class MasterViewController: UICollectionViewController {
             let itemSize = NSCollectionLayoutSize(widthDimension: width, heightDimension: .fractionalHeight(1))
             
             let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-//            layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+            layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
             
             let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: height)
             let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitems: [layoutItem])
             
             let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
             layoutSection.interGroupSpacing = 20
-            layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 16, trailing: 10)
+            layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 16, trailing: 0)
             
             return layoutSection
         }
         
         return layout
+    }
+    
+    @objc func cancelTapped(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true)
     }
     
     @objc func addAuthObserver() {
@@ -214,13 +221,14 @@ class MasterViewController: UICollectionViewController {
             destVC.delegate = self
             destVC.recent = sender as! Recent
             destVC.mode = destVC.recent.prediction.kind
+            destVC.onlyBookmarked = onlyBookmarked
         
         case "New Detection":
             let destVC = (segue.destination as! UINavigationController).topViewController as! DetailViewController
             destVC.delegate = self
             destVC.recent = sender as! Recent
             destVC.mode = mode
-            destVC.isPresentedModelly = true
+            destVC.isNew = true
             
         default:
             break
@@ -276,6 +284,32 @@ extension MasterViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: "Show Detail", sender: recents[indexPath.row])
+    }
+    
+    @available(iOS 13.0, *)
+    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            let recent = self.recents[indexPath.row]
+            var children = [UIAction]()
+            
+            for action in ActionCell.actions {
+                var title = action.rawValue
+                var attributes = UIMenuElement.Attributes()
+                var iconName = ActionCell.actionIcons[action]!
+                    
+                if action == .bookmark {
+                    title = "\((recent.bookmarked) ? "Remove from" : "Add to") Bookmarks"
+                    iconName = "\(ActionCell.actionIcons[action]!)\(((recent.bookmarked) ? ".fill" : ""))"
+                } else if action == .delete {
+                    attributes = .destructive
+                }
+                
+                children.append(UIAction(title: title, image: UIImage(systemName: iconName),
+                                         attributes: attributes, handler: { _ in self.performed(action: action, on: recent) }))
+            }
+            
+            return UIMenu(title: "Available Actions", children: children)
+        }
     }
     
 }
@@ -428,6 +462,28 @@ extension MasterViewController: DetailViewControllerDelegate {
             }
         }
         
+    }
+    
+    func performed(action: ActionCell.Action, on recent: Recent) {
+        switch action {
+        case .bookmark:
+            recent.toggleBookmark()
+        
+        case .exportToPDF:
+            exportToPDF(recent: recent)
+        
+        case .saveImageToPhotos:
+            saveImageToPhotos(recent: recent)
+        
+        case .saveMapToPhotos:
+            saveMapToPhotos(recent: recent)
+        
+        case .delete:
+            delete(recent: recent)
+        
+        default:
+            break
+        }
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {

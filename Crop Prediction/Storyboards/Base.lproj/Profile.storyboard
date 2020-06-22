@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -62,11 +63,71 @@
                     </navigationItem>
                     <connections>
                         <outlet property="signOutBtn" destination="caH-BL-wuo" id="bz7-NZ-xEM"/>
+                        <segue destination="LDI-KF-udH" kind="presentation" identifier="Show Help" id="pNd-tH-QcO"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cm1-Af-To8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="591" y="552"/>
+        </scene>
+        <!--Help-->
+        <scene sceneID="b29-bl-Jil">
+            <objects>
+                <viewController id="CNy-XG-CXi" customClass="HelpViewController" customModule="Kushagra" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="S30-MH-Pgr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" allowsBackForwardNavigationGestures="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mdD-HJ-g9f">
+                                <rect key="frame" x="0.0" y="56" width="414" height="752"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="mdD-HJ-g9f" firstAttribute="leading" secondItem="FhQ-Gt-TSa" secondAttribute="leading" id="0BG-D3-PAg"/>
+                            <constraint firstItem="FhQ-Gt-TSa" firstAttribute="trailing" secondItem="mdD-HJ-g9f" secondAttribute="trailing" id="BlP-b2-itB"/>
+                            <constraint firstItem="mdD-HJ-g9f" firstAttribute="top" secondItem="FhQ-Gt-TSa" secondAttribute="top" id="FOX-ZE-4X3"/>
+                            <constraint firstItem="FhQ-Gt-TSa" firstAttribute="bottom" secondItem="mdD-HJ-g9f" secondAttribute="bottom" id="nHu-VS-zF8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="FhQ-Gt-TSa"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Help" largeTitleDisplayMode="never" id="deR-iu-tbV">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Agu-o8-ELa">
+                            <connections>
+                                <action selector="cancelTapped:" destination="CNy-XG-CXi" id="Dhe-xT-3It"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="webView" destination="mdD-HJ-g9f" id="9ZN-Xt-so8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dC7-1z-8cA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2158" y="551"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Wus-DM-2b3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LDI-KF-udH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MLe-Pz-cmR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CNy-XG-CXi" kind="relationship" relationship="rootViewController" id="Yuy-vM-2XV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wG6-g8-qzr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1369.5652173913045" y="551.78571428571422"/>
         </scene>
     </scenes>
     <resources>

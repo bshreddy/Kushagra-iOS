@@ -120,14 +120,14 @@ class ActionCell: ListCell, SelfConfiguringPredictionCell {
     }
     
     static var actions: [Action] = [.bookmark, .exportToPDF, .saveImageToPhotos, .saveMapToPhotos, .delete]
-    private var actionIcons: [Action: String] = [.bookmark: "bookmark",
+    static var actionIcons: [Action: String] = [.bookmark: "bookmark",
                                                 .exportToPDF: "doc.richtext",
                                                 .saveImageToPhotos: "photo",
                                                 .saveMapToPhotos: "map.fill",
                                                 .delete: "trash.fill"]
     
     func configure(with recent: Recent, for indexPath: IndexPath) {
-        let iconName = actionIcons[ActionCell.actions[indexPath.row]]!
+        let iconName = ActionCell.actionIcons[ActionCell.actions[indexPath.row]]!
         title.text = ActionCell.actions[indexPath.row].rawValue
         title.textColor = .systemBlue
         imageView.tintColor = .systemBlue

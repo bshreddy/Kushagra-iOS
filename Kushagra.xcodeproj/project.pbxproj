@@ -34,6 +34,9 @@
 		72A6E8BD24A0F4BE001277FA /* report.html in Resources */ = {isa = PBXBuildFile; fileRef = 72A6E8BC24A0F4BE001277FA /* report.html */; };
 		72A6E8BF24A0F4EB001277FA /* CropDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6E8BE24A0F4EB001277FA /* CropDetails.swift */; };
 		72A6E8C124A0F50A001277FA /* InfoCardCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6E8C024A0F50A001277FA /* InfoCardCellData.swift */; };
+		72A6E8C324A10B16001277FA /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6E8C224A10B16001277FA /* ImageViewController.swift */; };
+		72A6E8C524A10B47001277FA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6E8C424A10B47001277FA /* MapViewController.swift */; };
+		72A6E8C724A121E0001277FA /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6E8C624A121E0001277FA /* HelpViewController.swift */; };
 		72E144E024850F210009469E /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E144DF24850F210009469E /* MasterViewController.swift */; };
 		72E144E224850F720009469E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E144E124850F720009469E /* DetailViewController.swift */; };
 		72E144E4248510710009469E /* PredictionSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E144E3248510710009469E /* PredictionSplitViewController.swift */; };
@@ -74,6 +77,9 @@
 		72A6E8BC24A0F4BE001277FA /* report.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = report.html; sourceTree = "<group>"; };
 		72A6E8BE24A0F4EB001277FA /* CropDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropDetails.swift; sourceTree = "<group>"; };
 		72A6E8C024A0F50A001277FA /* InfoCardCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCardCellData.swift; sourceTree = "<group>"; };
+		72A6E8C224A10B16001277FA /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		72A6E8C424A10B47001277FA /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		72A6E8C624A121E0001277FA /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		72E144DF24850F210009469E /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		72E144E124850F720009469E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		72E144E3248510710009469E /* PredictionSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionSplitViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +116,8 @@
 				72E144E124850F720009469E /* DetailViewController.swift */,
 				72E144E3248510710009469E /* PredictionSplitViewController.swift */,
 				72A6E8B824A0F48B001277FA /* ReportViewController.swift */,
+				72A6E8C224A10B16001277FA /* ImageViewController.swift */,
+				72A6E8C424A10B47001277FA /* MapViewController.swift */,
 			);
 			path = Prediction;
 			sourceTree = "<group>";
@@ -183,10 +191,10 @@
 		722589B524850802008091DB /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				7213508C24850CCE001A7ED0 /* Profile.storyboard */,
-				722D3C1B2486B17B005D6D83 /* Prediction.storyboard */,
-				722589A5248507C5008091DB /* Main.storyboard */,
 				722589AA248507C7008091DB /* LaunchScreen.storyboard */,
+				722D3C1B2486B17B005D6D83 /* Prediction.storyboard */,
+				7213508C24850CCE001A7ED0 /* Profile.storyboard */,
+				722589A5248507C5008091DB /* Main.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -230,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				72E144E5248512BC0009469E /* ProfileViewController.swift */,
+				72A6E8C624A121E0001277FA /* HelpViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -385,11 +394,13 @@
 				722D3C0424861E88005D6D83 /* Recent.swift in Sources */,
 				72E144E6248512BC0009469E /* ProfileViewController.swift in Sources */,
 				722D3C0824861EFA005D6D83 /* Location.swift in Sources */,
+				72A6E8C724A121E0001277FA /* HelpViewController.swift in Sources */,
 				722D3C0624861EB4005D6D83 /* Prediction.swift in Sources */,
 				722589A0248507C5008091DB /* AppDelegate.swift in Sources */,
 				722D3C242487ECE3005D6D83 /* ListCell.swift in Sources */,
 				722D3C142486AFBC005D6D83 /* ImageCell.swift in Sources */,
 				722589A2248507C5008091DB /* SceneDelegate.swift in Sources */,
+				72A6E8C524A10B47001277FA /* MapViewController.swift in Sources */,
 				72A6E8B924A0F48B001277FA /* ReportViewController.swift in Sources */,
 				722D3C1F2486BD5E005D6D83 /* SelfConfiguringPredictionCell.swift in Sources */,
 				72E144E024850F210009469E /* MasterViewController.swift in Sources */,
@@ -404,6 +415,7 @@
 				722D3C212486CBBE005D6D83 /* MapCell.swift in Sources */,
 				72A6E8C124A0F50A001277FA /* InfoCardCellData.swift in Sources */,
 				7219A11124A094CF00C19535 /* SelfConfiguringProfileCell.swift in Sources */,
+				72A6E8C324A10B16001277FA /* ImageViewController.swift in Sources */,
 				7219A10E24A0942F00C19535 /* UserProfileCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

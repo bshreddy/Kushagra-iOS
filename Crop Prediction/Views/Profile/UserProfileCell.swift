@@ -17,6 +17,7 @@ class UserProfileCell: UICollectionViewCell, SelfConfiguringProfileCell {
     let username = UILabel()
     let email = UILabel()
     var stackView: UIStackView!
+    var userDPWidth, stackViewLeadingConstraint: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,13 +39,16 @@ class UserProfileCell: UICollectionViewCell, SelfConfiguringProfileCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(stackView)
         
+        userDPWidth = userDP.widthAnchor.constraint(equalToConstant: 72)
+        stackViewLeadingConstraint = stackView.leadingAnchor.constraint(equalTo: userDP.trailingAnchor, constant: 16)
+        
         NSLayoutConstraint.activate([
             userDP.heightAnchor.constraint(equalToConstant: 72),
-            userDP.widthAnchor.constraint(equalToConstant: 72),
+            userDPWidth,
             userDP.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             userDP.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            stackView.leadingAnchor.constraint(equalTo: userDP.trailingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            stackViewLeadingConstraint,
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
@@ -57,12 +61,13 @@ class UserProfileCell: UICollectionViewCell, SelfConfiguringProfileCell {
         userDP.layer.cornerRadius = userDP.layer.frame.height / 2
         userDP.layer.masksToBounds = true
         
-        
         if let user = user {
             self.username.text = user.displayName
             self.email.text = user.email
             stackView.alignment = .leading
-                
+            userDPWidth.constant = 72
+            stackViewLeadingConstraint.constant = 16
+            
             self.userDP.image = UIImage(systemName: "person.crop.circle")
             URLSession.shared.dataTask(with: user.photoURL!) { data, response, error in
                 guard let data = data else {
@@ -79,6 +84,8 @@ class UserProfileCell: UICollectionViewCell, SelfConfiguringProfileCell {
             self.email.text = "Tap the \"Sign In\" button to sign-in"
             stackView.alignment = .center
             self.userDP.image = nil
+            userDPWidth.constant = 0
+            stackViewLeadingConstraint.constant = 0
         }
     }
     
