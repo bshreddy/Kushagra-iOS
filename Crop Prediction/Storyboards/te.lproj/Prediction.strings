@@ -1,0 +1,15 @@
+
+/* Class = "UITabBarItem"; title = "Disease"; ObjectID = "EE6-IQ-LTr"; */
+"EE6-IQ-LTr.title" = "వ్యాధి";
+
+/* Class = "UINavigationItem"; title = "Report"; ObjectID = "EVB-4T-elX"; */
+"EVB-4T-elX.title" = "నివేదిక";
+
+/* Class = "UINavigationItem"; title = "My Crops"; ObjectID = "Maj-XS-8DR"; */
+"Maj-XS-8DR.title" = "మీ పంటలు";
+
+/* Class = "UIBarButtonItem"; title = "Export"; ObjectID = "VOi-zO-moV"; */
+"VOi-zO-moV.title" = "సేవ్";
+
+/* Class = "UITabBarItem"; title = "Crop"; ObjectID = "xoV-mi-XDn"; */
+"xoV-mi-XDn.title" = "పంట";

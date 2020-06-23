@@ -1,0 +1,12 @@
+
+/* Class = "UITabBarItem"; title = "Your Profile"; ObjectID = "Wqg-bd-Wcb"; */
+"Wqg-bd-Wcb.title" = "Votre Profil";
+
+/* Class = "UIBarButtonItem"; title = "Sign Out"; ObjectID = "caH-BL-wuo"; */
+"caH-BL-wuo.title" = "Déconnexion";
+
+/* Class = "UINavigationItem"; title = "Help"; ObjectID = "deR-iu-tbV"; */
+"deR-iu-tbV.title" = "Aidez-moi";
+
+/* Class = "UINavigationItem"; title = "Your Profile"; ObjectID = "q3Q-XI-X8f"; */
+"q3Q-XI-X8f.title" = "Votre Profil";

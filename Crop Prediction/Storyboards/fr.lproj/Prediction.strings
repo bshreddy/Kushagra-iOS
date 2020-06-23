@@ -1,0 +1,15 @@
+
+/* Class = "UITabBarItem"; title = "Disease"; ObjectID = "EE6-IQ-LTr"; */
+"EE6-IQ-LTr.title" = "Maladie";
+
+/* Class = "UINavigationItem"; title = "Report"; ObjectID = "EVB-4T-elX"; */
+"EVB-4T-elX.title" = "Rapport";
+
+/* Class = "UINavigationItem"; title = "My Crops"; ObjectID = "Maj-XS-8DR"; */
+"Maj-XS-8DR.title" = "Vos Cultures";
+
+/* Class = "UIBarButtonItem"; title = "Export"; ObjectID = "VOi-zO-moV"; */
+"VOi-zO-moV.title" = "Exporter";
+
+/* Class = "UITabBarItem"; title = "Crop"; ObjectID = "xoV-mi-XDn"; */
+"xoV-mi-XDn.title" = "Culture";
