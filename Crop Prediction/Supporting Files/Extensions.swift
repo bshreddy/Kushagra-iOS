@@ -211,3 +211,15 @@ extension UISplitViewController {
     }
     
 }
+
+extension String {
+    
+    var localized: String {
+        NSLocalizedString(self, comment: "")
+    }
+    
+    var localizedCapitalized: String {
+        localized.capitalized
+    }
+    
+}

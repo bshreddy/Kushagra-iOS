@@ -65,7 +65,7 @@ class Prediction: Codable, CustomStringConvertible {
     }
     
     var predictedName: String {
-        predictedClass.capitalized
+        predictedClass.localizedCapitalized
     }
     
     var defaultImage: UIImage {

@@ -1,0 +1,72 @@
+/* 
+  Localizable.strings
+  Kushagra
+
+  Created by Sai Hemanth Bheemreddy on 23/06/20.
+  Copyright © 2020 Sai Hemanth Bheemreddy. All rights reserved.
+*/
+
+
+// Profile View Controller
+"Please Sign In to check your Profile"="దయచేసి మీ ప్రొఫైల్‌ను తనిఖీ చేయడానికి సైన్ ఇన్ అవండి";
+"Tap the \"Sign In\" button to sign-in"="ఎగువ \"సైన్ ఇన్\" బటన్‌తో సైన్ ఇన్ అవండి";
+"Bookmarks"="బుక్ మార్క్";
+"Server Address"="సర్వర్ చిరునామా";
+"Settings"="సెట్టింగులు";
+"Help"="సహాయం";
+"Tell a Friend"="స్నేహితులను ఆహ్వానించండి";
+
+"Sign Out"="సైన్ అవుట్";
+"Enter address of AI Inference Server"="AI అనుమితి సర్వర్ యొక్క చిరునామాను నమోదు చేయండి";
+"invite_messsage" = "హే,\n\nకుషాగ్రా యాప్ AI- శక్తితో కూడిన, సహజమైన అనువర్తనం, ఇది నా పంటలను, పంట వ్యాధులను గుర్తించడానికి మరియు పరిష్కారాలను పొందడానికి నేను ఉపయోగిస్తాను.\n\nప్లే స్టోర్‌లో ఉచితంగా పొందండి";
+"Save"="సేవ్";
+"Cancel"="రద్దు చేయు";
+
+// Master View Controller
+"Your Crops"="మీ పంటలు";
+"Crop Diseases"="పంట వ్యాధులు";
+"Select an Option"="ఎంపిక";
+"Camera"="కెమెరా";
+"Photo Library"="ఫోటో లైబ్రరీ";
+"Available Actions"="అందుబాటులో ఉన్న చర్యలు";
+
+// Detail View Controller
+"Crop Details"="పంట వివరాలు";
+"Disease Details"="వ్యాధి వివరాలు";
+"New Crop Detection"="కొత్త పంట గుర్తింపు";
+"New Disease Detection"="కొత్త వ్యాధి గుర్తింపు";
+"Name"="పేరు";
+"Latitude"="అక్షాంశం";
+"Longitude"="రేఖాంశం";
+"Altitude"="ఎత్తు";
+"Address"="చిరునామా";
+"Add to Bookmarks"="బుక్ మార్క్ లలో చేర్చు";
+"Remove from Bookmarks"="బుక్ మార్క్ నుండి తొలగించు";
+"Export to PDF"="బుక్ మార్క్ నుండి తొలగించు";
+"Save Image to Photos"="పంట చిత్రాన్ని ఫోటోలలో సేవ్ చేయండి";
+"Save Map To Photos"="పంట చిత్రాన్ని ఫోటోలలో సేవ్ చేయండి";
+"Delete"="తొలగించు";
+"Are your sure?"="మీరు ఖచ్చితంగా ఉన్నారా?";
+"Discard"="తొలగించు";
+"Close"="మూసివేయి";
+"Options"="ఎంపికలు";
+
+// Classes
+"coffee"="కాఫీ";
+"cotton"="పత్తి";
+"jute"="జనపనార";
+"maize"="మొక్కజొన్న";
+"millet"="జొన్నలు";
+"rice"="వరి";
+"sugarcane"="చెరుకుగడ";
+"tea"="టీ";
+"tomato"="టమోటా";
+"wheat"="గోధుమ";
+
+//Error Messages
+"An Unknown Error Occurred"="తెలియని లోపం సంభవించింది";
+"An error occurred while saving"="సేవ్ చేస్తున్నప్పుడు లోపం సంభవించింది";
+"Unable to Read Data.\nError while Parsing Data"="డేటా చదవడం సాధ్యం కాలేదు.\nడేటాను అన్వయించేటప్పుడు లోపం";
+"Unable to Save for some unknown reason"="కొన్ని తెలియని కారణాల వల్ల సేవ్ చేయడం సాధ్యం కాలేదు";
+"Unable to Delete for some unknown reason"="కొన్ని తెలియని కారణాల వల్ల తొలగించడం సాధ్యం కాలేదు";
+"Error while displaying report"="నివేదికను ప్రదర్శించేటప్పుడు లోపం";

@@ -79,7 +79,8 @@ class ProfileCell: UICollectionViewCell, SelfConfiguringProfileCell {
     
     func configure(for user: User?, with identifier: Identifier) {
         if let _ = user {
-            title.text = cellTexts[identifier]!
+            print("\(Date()) \(URL(fileURLWithPath: #file).deletingPathExtension().lastPathComponent).\(#function) > \(cellTexts[identifier]!.localized)")
+            title.text = cellTexts[identifier]!.localized
             iconView.image = UIImage(systemName: cellIcons[identifier]!)
             iconView.tintColor = cellIconsTint[identifier]!
             separator.isHidden = false

@@ -13,6 +13,7 @@ class HelpViewController: UIViewController, WKNavigationDelegate {
 
     @IBOutlet weak var webView: WKWebView!
     private var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var cancelBtn: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ class HelpViewController: UIViewController, WKNavigationDelegate {
         
         spinner = UIActivityIndicatorView.default
         spinner.constraintToCenter(of: view)
+        cancelBtn.title = "Cancel".localized
     }
     
     override func viewDidAppear(_ animated: Bool) {

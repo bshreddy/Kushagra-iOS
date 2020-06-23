@@ -43,17 +43,20 @@ class DetailViewController: UICollectionViewController {
         super.viewDidLoad()
         
         if isNew {
-            navigationItem.title = "New \(mode.rawValue.capitalized) Detection"
-            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped(_:)))
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveTapped))
+            navigationItem.title = "New \(mode.rawValue.capitalized) Detection".localized
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close".localized, style: .plain,
+                                                               target: self, action: #selector(cancelTapped(_:)))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save".localized, style: .plain,
+                                                                target: self, action: #selector(saveTapped))
         } else {
             identifiers.append(.actionCell)
-            navigationItem.title = "\(mode.rawValue.capitalized) Details"
+            navigationItem.title = "\(mode.rawValue.capitalized) Details".localized
             navigationController?.navigationBar.prefersLargeTitles = true
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),
                                                                 style: .plain, target: self, action: #selector(optionsTapped(_:)))
             if onlyBookmarked {
-                navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped(_:)))
+                navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close".localized, style: .plain,
+                                                                   target: self, action: #selector(cancelTapped(_:)))
             }
         }
         
@@ -160,15 +163,15 @@ class DetailViewController: UICollectionViewController {
             self.dismiss(animated: true)
         }
         
-        let alertController = UIAlertController(title: "Are you sure?", message: nil, preferredStyle: .actionSheet)
-        alertController.addAction(UIAlertAction(title: "Save", style: .default) { _ in
+        let alertController = UIAlertController(title: "Are you sure?".localized, message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Save".localized, style: .default) { _ in
             self.saveTapped()
         })
-        alertController.addAction(UIAlertAction(title: "Discard", style: .destructive) { _ in
+        alertController.addAction(UIAlertAction(title: "Discard".localized, style: .destructive) { _ in
             alertController.dismiss(animated: true)
             self.dismiss(animated: true)
         })
-        alertController.addAction(UIAlertAction(title: "Close", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "Close".localized, style: .cancel))
         
         if let popoverController = alertController.popoverPresentationController {
             popoverController.barButtonItem = sender
@@ -183,13 +186,13 @@ class DetailViewController: UICollectionViewController {
     }
     
     @objc func optionsTapped(_ sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: "Options", message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "Options".localized, message: nil, preferredStyle: .actionSheet)
         for action in ActionCell.actions {
-            var title = action.rawValue
+            var title = action.rawValue.localized
             var style = UIAlertAction.Style.default
                 
             if action == .bookmark {
-                title = "\((recent.bookmarked) ? "Remove from" : "Add to") Bookmarks"
+                title = "\((recent.bookmarked) ? "Remove from" : "Add to") Bookmarks".localized
             } else if action == .delete {
                 style = .destructive
             }
@@ -203,7 +206,7 @@ class DetailViewController: UICollectionViewController {
             }))
         }
         
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel))
         
         if let popoverController = alertController.popoverPresentationController {
             popoverController.barButtonItem = sender

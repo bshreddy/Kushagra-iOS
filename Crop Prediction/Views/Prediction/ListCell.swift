@@ -79,19 +79,19 @@ class DetailsTextCell: ListCell, SelfConfiguringPredictionCell {
     func configure(with recent: Recent, for indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            title.text = "\(recent.prediction.kind.rawValue.capitalized) Name: "
+            title.text = "\("Name".localized): "
             subtitle.text = recent.prediction.predictedName
         case 1:
-            title.text = "Latitude: "
+            title.text = "\("Latitude".localized): "
             subtitle.text = recent.location?.latString ?? "N/A"
         case 2:
-            title.text = "Logitude: "
+            title.text = "\("Longitude".localized): "
             subtitle.text = recent.location?.longString ?? "N/A"
         case 3:
-            title.text = "Altitude: "
+            title.text = "\("Altitude".localized): "
             subtitle.text = recent.location?.altString ?? "N/A"
         case 4:
-            title.text = "Address: "
+            title.text = "\("Address".localized): "
             subtitle.text = recent.location?.address ?? "N/A"
         default:
             title.text = "N/A"
@@ -128,7 +128,7 @@ class ActionCell: ListCell, SelfConfiguringPredictionCell {
     
     func configure(with recent: Recent, for indexPath: IndexPath) {
         let iconName = ActionCell.actionIcons[ActionCell.actions[indexPath.row]]!
-        title.text = ActionCell.actions[indexPath.row].rawValue
+        title.text = ActionCell.actions[indexPath.row].rawValue.localized
         title.textColor = .systemBlue
         imageView.tintColor = .systemBlue
         
@@ -136,7 +136,7 @@ class ActionCell: ListCell, SelfConfiguringPredictionCell {
         
         switch ActionCell.actions[indexPath.row] {
         case .bookmark:
-            title.text = "\((recent.bookmarked) ? "Remove from" : "Add to") Bookmarks"
+            title.text = "\((recent.bookmarked) ? "Remove from" : "Add to") Bookmarks".localized
             imageView.image = UIImage(systemName: "\(iconName)\((recent.bookmarked) ? ".fill" : "")")
             
         case .delete:

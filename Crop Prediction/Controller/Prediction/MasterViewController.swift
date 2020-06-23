@@ -46,7 +46,8 @@ class MasterViewController: UICollectionViewController {
         imagePicker.delegate = self
         
         if onlyBookmarked {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped(_:)))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close".localized, style: .plain,
+                                                               target: self, action: #selector(cancelTapped(_:)))
         }
         
         collectionView.collectionViewLayout = createLayout()
@@ -59,17 +60,17 @@ class MasterViewController: UICollectionViewController {
     fileprivate func setMode() {
         if onlyBookmarked {
             navigationItem.rightBarButtonItem = .none
-            navigationItem.title = "Bookmarks"
+            navigationItem.title = "Bookmarks".localized
             return
         }
         
         switch tabBarController?.selectedIndex {
         case 0:
             mode = .crop
-            navigationItem.title = "Your Crops"
+            navigationItem.title = "Your Crops".localized
         case 1:
             mode = .disease
-            navigationItem.title = "Crop Diseases"
+            navigationItem.title = "Crop Diseases".localized
         default:
             break
         }
@@ -187,7 +188,7 @@ class MasterViewController: UICollectionViewController {
         query.order(by: Recent.CodingKeys.createdAt.rawValue, descending: true)
         .getDocuments { snapshot, error in
             guard let snapshot = snapshot else {
-                showErrorDialog(message: error?.localizedDescription ?? "An Unknown Error Occurred", presentingVC: self)
+                showErrorDialog(message: error?.localizedDescription ?? "An Unknown Error Occurred".localized, presentingVC: self)
                 return
             }
             
@@ -201,7 +202,7 @@ class MasterViewController: UICollectionViewController {
                     recent.id = id
                     recents.append(recent)
                 } else {
-                    showErrorDialog(message: "Unable to Read Data.\nError while Parsing Data", presentingVC: self)
+                    showErrorDialog(message: "Unable to Read Data.\nError while Parsing Data".localized, presentingVC: self)
                 }
             }
             
@@ -237,18 +238,18 @@ class MasterViewController: UICollectionViewController {
     
     @IBAction func cameraTapped(_ sender: UIBarButtonItem) {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let actionSheet = UIAlertController(title: "Select an Option", message: nil, preferredStyle: .actionSheet)
-            actionSheet.addAction(UIAlertAction(title: "Camera", style: .default) { _ in
+            let actionSheet = UIAlertController(title: "Select an Option".localized, message: nil, preferredStyle: .actionSheet)
+            actionSheet.addAction(UIAlertAction(title: "Camera".localized, style: .default) { _ in
                 self.imagePicker.sourceType = .camera
                 self.present(self.imagePicker, animated: true)
             })
 
-            actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default) { _ in
+            actionSheet.addAction(UIAlertAction(title: "Photo Library".localized, style: .default) { _ in
                 self.imagePicker.sourceType = .photoLibrary
                 self.present(self.imagePicker, animated: true)
             })
 
-            actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            actionSheet.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel))
             self.present(actionSheet, animated: true)
         } else {
             imagePicker.sourceType = .photoLibrary
@@ -293,12 +294,12 @@ extension MasterViewController {
             var children = [UIAction]()
             
             for action in ActionCell.actions {
-                var title = action.rawValue
+                var title = action.rawValue.localized
                 var attributes = UIMenuElement.Attributes()
                 var iconName = ActionCell.actionIcons[action]!
                     
                 if action == .bookmark {
-                    title = "\((recent.bookmarked) ? "Remove from" : "Add to") Bookmarks"
+                    title = "\((recent.bookmarked) ? "Remove from" : "Add to") Bookmarks".localized
                     iconName = "\(ActionCell.actionIcons[action]!)\(((recent.bookmarked) ? ".fill" : ""))"
                 } else if action == .delete {
                     attributes = .destructive
@@ -308,7 +309,7 @@ extension MasterViewController {
                                          attributes: attributes, handler: { _ in self.performed(action: action, on: recent) }))
             }
             
-            return UIMenu(title: "Available Actions", children: children)
+            return UIMenu(title: "Available Actions".localized, children: children)
         }
     }
     
@@ -326,7 +327,8 @@ extension MasterViewController: DetailViewControllerDelegate {
             let dataDict = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
             let imgData = image.pngData(),
             let doc = recentsRef?.document() else {
-            print("Error Saving estimate")
+//                Show User Error
+            print("An error occurred while saving")
             return
         }
         
@@ -341,7 +343,7 @@ extension MasterViewController: DetailViewControllerDelegate {
         dispatchGroup.enter()
         imgRef?.putData(imgData, metadata: nil) { metadata, error in
             if metadata == nil {
-                print(error?.localizedDescription ?? "Unknown Error")
+                print(error?.localizedDescription ?? "An Unknown Error Occurred")
                 errorOccurred = true
             }
             
@@ -373,7 +375,7 @@ extension MasterViewController: DetailViewControllerDelegate {
         
         dispatchGroup.notify(queue: .main) {
             if(errorOccurred) {
-                showErrorDialog(message: "Unable to Save for some unknown reasons", presentingVC: self)
+                showErrorDialog(message: "Unable to Save for some unknown reason".localized, presentingVC: self)
             }
             
             self.spinner.stopAnimating()
@@ -429,7 +431,7 @@ extension MasterViewController: DetailViewControllerDelegate {
             recent.loadImage(user: user!, recentImagesRef: recentImagesRef!) { image in
                 guard let image = image else {
 //                TODO: Show User error message
-                    print("Unknown Error Occurred")
+                    print("An Unknown Error Occurred")
                     return
                 }
                 
@@ -451,7 +453,7 @@ extension MasterViewController: DetailViewControllerDelegate {
                     UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
                 } else {
 //                    TODO: Show user error message
-                    print(error?.localizedDescription ?? "Unknown Error")
+                    print(error?.localizedDescription ?? "An Unknown Error Occurred")
                 }
             }
         }
@@ -462,7 +464,7 @@ extension MasterViewController: DetailViewControllerDelegate {
             let id = recent.id,
             let doc = recentsRef?.document(id),
             let index = recents.firstIndex(where: {$0.id == recent.id}) else {
-            showErrorDialog(message: "Unable to Delete for some unknown reasons", presentingVC: self)
+                showErrorDialog(message: "Unable to Delete for some unknown reason".localized, presentingVC: self)
             return
         }
         
@@ -474,7 +476,7 @@ extension MasterViewController: DetailViewControllerDelegate {
             }
             
             if error != nil {
-                showErrorDialog(message: "Unable to Delete for some unknown reasons", presentingVC: self)
+                showErrorDialog(message: "Unable to Delete for some unknown reason".localized, presentingVC: self)
                 return
             } else {
                 do {
@@ -519,7 +521,7 @@ extension MasterViewController: UINavigationControllerDelegate, UIImagePickerCon
             }
 
             guard let prediction = prediction else {
-                print("Unknown Error Occurred")
+                print("An Unknown Error Occurred")
                 return
             }
 

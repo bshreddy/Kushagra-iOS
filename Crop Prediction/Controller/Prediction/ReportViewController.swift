@@ -67,6 +67,7 @@ class ReportViewController: UIViewController, WKNavigationDelegate {
             
             self.present(shareController, animated: true)
         } else {
+//            TODO: Show user report
             print("Error while displaying report")
         }
     }

@@ -112,7 +112,7 @@ class ProfileViewController: UICollectionViewController {
             
             self.collectionView.reloadData()
             
-            self.signOutBtn.title = (user == nil) ? "Sign In" : "Sign Out"
+            self.signOutBtn.title = (user == nil) ? "Sign In".localized : "Sign Out".localized
             self.signOutBtn.tintColor = (user == nil) ? .systemBlue : .systemRed
         }
     }
@@ -163,17 +163,17 @@ extension ProfileViewController {
              self.present(UINavigationController(rootViewController: vc), animated: true)
             
         case .serverAddrCell:
-            let alert = UIAlertController(title: "Server Address",
-                                          message: "Enter address of AI Inference Server",
+            let alert = UIAlertController(title: "Server Address".localized,
+                                          message: "Enter address of AI Inference Server".localized,
                                           preferredStyle: .alert)
             alert.addTextField() { textField in
                 textField.text = ServerURL.absoluteString
                 textField.textContentType = .URL
             }
-            alert.addAction(UIAlertAction(title: "Save", style: .default) {_ in
+            alert.addAction(UIAlertAction(title: "Save".localized, style: .default) {_ in
                 ServerURL = URL(string: alert.textFields!.first!.text!)!
             })
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel))
             self.present(alert, animated: true)
             
         case .settingsCell:
@@ -183,8 +183,8 @@ extension ProfileViewController {
             performSegue(withIdentifier: "Show Help", sender: indexPath)
             
         case .tellCell:
-            let message = "Hey,\n\nCrop Prediction App is an AI-powered, intuitive app that I use to identify my crops, " +
-                "crop diseases and get solutions.\n\nGet it for free at <App store URL>"
+            let message = "invite_messsage".localized
+            print(message)
             let shareController = UIActivityViewController(activityItems: [message], applicationActivities: nil)
             
             if let popoverController = shareController.popoverPresentationController {

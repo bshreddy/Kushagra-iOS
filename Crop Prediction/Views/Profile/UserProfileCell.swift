@@ -80,8 +80,8 @@ class UserProfileCell: UICollectionViewCell, SelfConfiguringProfileCell {
                 }
             }.resume()
         } else {
-            self.username.text = "Please Sign In to check your Profile"
-            self.email.text = "Tap the \"Sign In\" button to sign-in"
+            self.username.text = "Please Sign In to check your Profile".localized
+            self.email.text = "Tap the \"Sign In\" button to sign-in".localized
             stackView.alignment = .center
             self.userDP.image = nil
             userDPWidth.constant = 0

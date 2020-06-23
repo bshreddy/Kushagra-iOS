@@ -42,11 +42,11 @@ class Location: Codable, CustomStringConvertible {
     }
     
     var latString: String {
-        String(format: "%.3f˚ \((lat.sign.rawValue == 0) ? "N" : "S")", lat.magnitude)
+        String(format: "%.6f˚ \((lat.sign.rawValue == 0) ? "N" : "S")", lat.magnitude)
     }
     
     var longString: String {
-        String(format: "%.3f˚ \((long.sign.rawValue == 0) ? "E" : "W")", long.magnitude)
+        String(format: "%.6f˚ \((long.sign.rawValue == 0) ? "E" : "W")", long.magnitude)
     }
     
     var altString: String {

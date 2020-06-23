@@ -182,7 +182,7 @@
             </objects>
             <point key="canvasLocation" x="740" y="-200"/>
         </scene>
-        <!--My Crops-->
+        <!--Your Crops-->
         <scene sceneID="ZIO-hO-tOH">
             <objects>
                 <collectionViewController storyboardIdentifier="HomeView" id="4Dh-qh-Syd" customClass="MasterViewController" customModule="Kushagra" customModuleProvider="target" sceneMemberID="viewController">
@@ -206,7 +206,7 @@
                             <outlet property="delegate" destination="4Dh-qh-Syd" id="yDD-ZU-qzM"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="My Crops" id="Maj-XS-8DR">
+                    <navigationItem key="navigationItem" title="Your Crops" id="Maj-XS-8DR">
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="ndr-sa-o2J">
                             <connections>
                                 <action selector="cameraTapped:" destination="4Dh-qh-Syd" id="jfK-mK-HAF"/>

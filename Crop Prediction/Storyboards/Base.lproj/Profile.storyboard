@@ -97,13 +97,14 @@
                         <viewLayoutGuide key="safeArea" id="FhQ-Gt-TSa"/>
                     </view>
                     <navigationItem key="navigationItem" title="Help" largeTitleDisplayMode="never" id="deR-iu-tbV">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Agu-o8-ELa">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Agu-o8-ELa">
                             <connections>
                                 <action selector="cancelTapped:" destination="CNy-XG-CXi" id="Dhe-xT-3It"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelBtn" destination="Agu-o8-ELa" id="NLE-BQ-keg"/>
                         <outlet property="webView" destination="mdD-HJ-g9f" id="9ZN-Xt-so8"/>
                     </connections>
                 </viewController>
