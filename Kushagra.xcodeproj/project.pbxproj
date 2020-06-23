@@ -44,10 +44,11 @@
 		72E144E4248510710009469E /* PredictionSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E144E3248510710009469E /* PredictionSplitViewController.swift */; };
 		72E144E6248512BC0009469E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E144E5248512BC0009469E /* ProfileViewController.swift */; };
 		72E144E9248517990009469E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E144E8248517990009469E /* Extensions.swift */; };
-		88A12CEE03A165D01C5F4DA7 /* Pods_Kushagra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DDEA979DD7C09776B49804B /* Pods_Kushagra.framework */; };
+		AAC6052FC2C26F208D92D9BF /* libPods-Kushagra.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AD44F3157C4B24F4C6817DA /* libPods-Kushagra.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1AD44F3157C4B24F4C6817DA /* libPods-Kushagra.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kushagra.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5977EF9352045AD41A7A373D /* Pods-Kushagra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kushagra.debug.xcconfig"; path = "Target Support Files/Pods-Kushagra/Pods-Kushagra.debug.xcconfig"; sourceTree = "<group>"; };
 		7213508D24850CCE001A7ED0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		7219A10B24A092A300C19535 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -99,7 +100,6 @@
 		72E144E3248510710009469E /* PredictionSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionSplitViewController.swift; sourceTree = "<group>"; };
 		72E144E5248512BC0009469E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		72E144E8248517990009469E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		7DDEA979DD7C09776B49804B /* Pods_Kushagra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kushagra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D4A6F1E7315A404A0BC3C5 /* Pods-Kushagra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kushagra.release.xcconfig"; path = "Target Support Files/Pods-Kushagra/Pods-Kushagra.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,7 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88A12CEE03A165D01C5F4DA7 /* Pods_Kushagra.framework in Frameworks */,
+				AAC6052FC2C26F208D92D9BF /* libPods-Kushagra.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,7 +118,7 @@
 		07A1FA3A59F4CAE839441DE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7DDEA979DD7C09776B49804B /* Pods_Kushagra.framework */,
+				1AD44F3157C4B24F4C6817DA /* libPods-Kushagra.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -279,7 +279,6 @@
 				72258998248507C5008091DB /* Sources */,
 				72258999248507C5008091DB /* Frameworks */,
 				7225899A248507C5008091DB /* Resources */,
-				7E0C0C43B6C121B4DD7D40F8 /* [CP] Embed Pods Frameworks */,
 				6AD15A51B3577FAE4EB474D2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -363,23 +362,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kushagra/Pods-Kushagra-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7E0C0C43B6C121B4DD7D40F8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Kushagra/Pods-Kushagra-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Kushagra/Pods-Kushagra-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kushagra/Pods-Kushagra-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F7F1B589E84B4663A0941BB8 /* [CP] Check Pods Manifest.lock */ = {
@@ -628,6 +610,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Crop Prediction/Crop Prediction.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LW8T8WKL5S;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Crop Prediction/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -650,6 +633,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Crop Prediction/Crop Prediction.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LW8T8WKL5S;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Crop Prediction/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
