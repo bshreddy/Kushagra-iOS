@@ -380,17 +380,46 @@ extension MasterViewController: DetailViewControllerDelegate {
         }
     }
     
+    func performed(action: ActionCell.Action, on recent: Recent) {
+        switch action {
+        case .bookmark:
+            recent.toggleBookmark()
+        
+        case .exportToPDF:
+            exportToPDF(recent: recent)
+        
+        case .saveImageToPhotos:
+            saveImageToPhotos(recent: recent)
+        
+        case .saveMapToPhotos:
+            saveMapToPhotos(recent: recent)
+        
+        case .delete:
+            delete(recent: recent)
+        
+        default:
+            break
+        }
+    }
+    
+    func getDetails(for prediction: Prediction, withCompletion completionHandler: @escaping (([String:String]) -> Void)) {
+        detailsRef?.document(prediction.predictedClass).getDocument { snapshot, error in
+            guard let snapshot = snapshot else { return }
+            
+            print(snapshot.data())
+//            JSONSerialization
+        }
+    }
+    
     func exportToPDF(recent: Recent) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "ReportViewController") as! ReportViewController
         vc.data = (recent: recent, cropDetails: nil)
         
-        self.present(UINavigationController(rootViewController: vc), animated: true)
-        
-//        if(splitViewController?.isDetailsVisible ?? false) {
-//            splitViewController?.showDetailViewController(UINavigationController(rootViewController: vc), sender: self)
-//        } else {
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }
+        if(splitViewController?.isDetailsVisible ?? false) {
+            self.present(UINavigationController(rootViewController: vc), animated: true)
+        } else {
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     func saveImageToPhotos(recent: Recent) {
@@ -462,28 +491,6 @@ extension MasterViewController: DetailViewControllerDelegate {
             }
         }
         
-    }
-    
-    func performed(action: ActionCell.Action, on recent: Recent) {
-        switch action {
-        case .bookmark:
-            recent.toggleBookmark()
-        
-        case .exportToPDF:
-            exportToPDF(recent: recent)
-        
-        case .saveImageToPhotos:
-            saveImageToPhotos(recent: recent)
-        
-        case .saveMapToPhotos:
-            saveMapToPhotos(recent: recent)
-        
-        case .delete:
-            delete(recent: recent)
-        
-        default:
-            break
-        }
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {

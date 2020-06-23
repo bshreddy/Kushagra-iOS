@@ -10,11 +10,8 @@ import UIKit
 
 protocol DetailViewControllerDelegate: NSObject {
     func save(recent: Recent)
-    func exportToPDF(recent: Recent)
-    func saveImageToPhotos(recent: Recent)
-    func saveMapToPhotos(recent: Recent)
-    func delete(recent: Recent)
     func performed(action: ActionCell.Action, on recent: Recent)
+    func getDetails(for prediction: Prediction, withCompletion completionHandler: @escaping (([String:String]) -> Void))
 }
 
 class DetailViewController: UICollectionViewController {
@@ -72,6 +69,14 @@ class DetailViewController: UICollectionViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(bookmarkDidChange), name: Recent.bookmarkDidChange, object: recent)
         NotificationCenter.default.addObserver(self, selector: #selector(addressDidChange), name: Location.addressDidChange, object: recent.location)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        delegate?.getDetails(for: recent.prediction) { details in
+            
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
