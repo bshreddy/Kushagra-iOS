@@ -17,41 +17,54 @@ class ListCell: UICollectionViewCell {
     var title = UILabel()
     var subtitle = UILabel()
     var separator = UIView(frame: .zero)
+    var imageViewWidth: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         imageView.image = nil
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        contentView.addSubview(imageView)
         
         title.font = UIFont.preferredFont(forTextStyle: .body)
         title.translatesAutoresizingMaskIntoConstraints = false
         title.textColor = .secondaryLabel
+        contentView.addSubview(title)
         
         subtitle.font = UIFont.preferredFont(forTextStyle: .body)
         subtitle.translatesAutoresizingMaskIntoConstraints = false
         subtitle.textColor = .label
+        subtitle.numberOfLines = 0
+        subtitle.adjustsFontSizeToFitWidth = false
+        subtitle.lineBreakMode = .byTruncatingTail
         
-        let stackView = UIStackView(arrangedSubviews: [imageView, title, subtitle])
-        stackView.alignment = .center
-        stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(stackView)
+        contentView.addSubview(subtitle)
         
         separator.backgroundColor = .quaternaryLabel
         separator.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(separator)
+        
+        imageViewWidth = imageView.widthAnchor.constraint(equalToConstant: 24)
         
         NSLayoutConstraint.activate([
             separator.heightAnchor.constraint(equalToConstant: 1),
             separator.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
             separator.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             separator.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0)
+            
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
+            imageView.heightAnchor.constraint(equalToConstant: 24), imageViewWidth,
+            
+            title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+            title.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
+            title.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
+            
+            subtitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+            subtitle.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
+            subtitle.leadingAnchor.constraint(greaterThanOrEqualTo: title.trailingAnchor, constant: 10),
+            subtitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
         ])
         
     }
@@ -70,6 +83,7 @@ class DetailsTextCell: ListCell, SelfConfiguringPredictionCell {
         super.init(frame: frame)
         
         imageView.isHidden = true
+        imageViewWidth.constant = 0
     }
     
     required init?(coder: NSCoder) {
@@ -77,26 +91,8 @@ class DetailsTextCell: ListCell, SelfConfiguringPredictionCell {
     }
     
     func configure(with recent: Recent, for indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
-            title.text = "\("Name".localized): "
-            subtitle.text = recent.prediction.predictedName
-        case 1:
-            title.text = "\("Latitude".localized): "
-            subtitle.text = recent.location?.latString ?? "N/A"
-        case 2:
-            title.text = "\("Longitude".localized): "
-            subtitle.text = recent.location?.longString ?? "N/A"
-        case 3:
-            title.text = "\("Altitude".localized): "
-            subtitle.text = recent.location?.altString ?? "N/A"
-        case 4:
-            title.text = "\("Address".localized): "
-            subtitle.text = recent.location?.address ?? "N/A"
-        default:
-            title.text = "N/A"
-            subtitle.text = "N/A"
-        }
+        title.text = "\(recent.infoList[indexPath.row].title.localized): "
+        subtitle.text = recent.infoList[indexPath.row].subtitle?.localized ?? "N/A"
     }
     
     func deconfigure() {

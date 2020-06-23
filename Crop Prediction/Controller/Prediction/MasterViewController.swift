@@ -404,12 +404,15 @@ extension MasterViewController: DetailViewControllerDelegate {
         }
     }
     
-    func getDetails(for prediction: Prediction, withCompletion completionHandler: @escaping (([String:String]) -> Void)) {
+    func getDetails(for prediction: Prediction, withCompletion completionHandler: @escaping ((CropDetails) -> Void)) {
         detailsRef?.document(prediction.predictedClass).getDocument { snapshot, error in
             guard let snapshot = snapshot else { return }
             
-            print(snapshot.data())
-//            JSONSerialization
+            if let dataDict = snapshot.data(),
+                let data = try? JSONSerialization.data(withJSONObject: dataDict, options: []),
+                let details = try? JSONDecoder().decode(CropDetails.self, from: data) {
+                completionHandler(details)
+            }
         }
     }
     

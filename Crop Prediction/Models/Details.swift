@@ -1,14 +1,18 @@
 //
-//  CropDetails.swift
+//  Details.swift
 //  Kushagra
 //
-//  Created by Sai Hemanth Bheemreddy on 22/06/20.
+//  Created by Sai Hemanth Bheemreddy on 24/06/20.
 //  Copyright © 2020 Sai Hemanth Bheemreddy. All rights reserved.
 //
 
 import Foundation
 
-struct CropDetails: Decodable {
+protocol Details: Decodable {
+    func getInfoCellData() -> [InfoCardCellData]
+}
+
+struct CropDetails: Details {
     
     var type: String?
     var techniquesUsed: String?
@@ -50,9 +54,17 @@ struct CropDetails: Decodable {
          InfoCardCellData(title: "Varieties", subtitle: varieties),
          InfoCardCellData(title: "Temp", subtitle: temp),
          InfoCardCellData(title: "Rainfall", subtitle: rainfall),
-         InfoCardCellData(title: "Soil", subtitle: soil),
+         InfoCardCellData(title: "Soil Type", subtitle: soil),
          InfoCardCellData(title: "Highest Producer", subtitle: highestProducer),
          InfoCardCellData(title: "Major Producers", subtitle: majorProducers?.joined(separator: ", "))]
     }
     
 }
+
+struct DiseaseDetails: Details {
+    
+    func getInfoCellData() -> [InfoCardCellData] {
+        return [InfoCardCellData]()
+    }
+}
+

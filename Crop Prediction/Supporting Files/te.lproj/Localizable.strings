@@ -36,10 +36,20 @@
 "New Crop Detection"="కొత్త పంట గుర్తింపు";
 "New Disease Detection"="కొత్త వ్యాధి గుర్తింపు";
 "Name"="పేరు";
+"Conf"="నమ్మకత్వం";
 "Latitude"="అక్షాంశం";
 "Longitude"="రేఖాంశం";
 "Altitude"="ఎత్తు";
 "Address"="చిరునామా";
+"Type"="వర్గం";
+"Techniques Used"="ఉపయోగించిన పద్ధతులు";
+"Varieties"="రకాలు";
+"Temp"="ఉష్ణోగ్రత";
+"Rainfall"="వర్షపాతం";
+"Soil Type"="నేల రకం";
+"Highest Producer"="అత్యధిక ఉత్పత్తిదారుడు";
+"Major Producers"="ప్రధాన ఉత్పత్తిదారులు";
+
 "Add to Bookmarks"="బుక్ మార్క్ లలో చేర్చు";
 "Remove from Bookmarks"="బుక్ మార్క్ నుండి తొలగించు";
 "Export to PDF"="బుక్ మార్క్ నుండి తొలగించు";
@@ -50,6 +60,7 @@
 "Discard"="తొలగించు";
 "Close"="మూసివేయి";
 "Options"="ఎంపికలు";
+"Confidence"="Confidence";
 
 // Classes
 "coffee"="కాఫీ";

@@ -35,6 +35,7 @@
 "New Crop Detection"="Nouvelle Détection de Culture";
 "New Disease Detection"="Nouvelle Détection de Maladie";
 "Name"="Name";
+"Conf"="Confidence";
 "Address"="Adresse";
 "Add to Bookmarks"="Ajouter aux Favoris";
 "Remove from Bookmarks"="Supprimer dess Favoris";
@@ -46,6 +47,7 @@
 "Discard"="Jeter";
 "Close"="Fermer";
 "Options"="Options";
+"Confidence"="Confidence";
 
 // Classes
 "coffee"="café";

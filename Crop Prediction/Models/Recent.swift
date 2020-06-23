@@ -47,14 +47,17 @@ class Recent: Codable {
     
     var id: ID?
     var prediction: Prediction
+    var createdAt: Date
+    var location: Location?
+    var details: Details?
     private(set) var bookmarked: Bool {
         didSet {
             NotificationCenter.default.post(name: Recent.bookmarkDidChange, object: self)
         }
     }
-    var createdAt: Date
-    var location: Location?
-//    var details: CropDetails?
+    lazy var infoList: [InfoCardCellData] = {
+        updateInfoList()
+    }()
     
     enum CodingKeys: String, CodingKey {
         case prediction = "pred"
@@ -126,6 +129,61 @@ class Recent: Codable {
                 let image = UIImage(data: data)
                 self.prediction.image = image
                 completionHandler(image)
+            }
+        }
+    }
+    
+    func updateInfoList() -> [InfoCardCellData] {
+        var list = [InfoCardCellData(title: "Name", subtitle: prediction.predictedName),
+                    InfoCardCellData(title: "Latitude", subtitle: location?.latString),
+                    InfoCardCellData(title: "Longitude", subtitle: location?.longString),
+                    InfoCardCellData(title: "Altitude", subtitle: location?.altString),
+                    InfoCardCellData(title: "Address", subtitle: location?.address)]
+        
+        if(prediction.kind == .crop) {
+            list.insert(InfoCardCellData(title: "Conf",
+                                         subtitle: String(format: "%.3f", prediction.confidences[prediction.predictedIdx] * 100) + " %"),
+                        at: 1)
+        }
+        
+        if let details = details {
+            if prediction.kind == .crop {
+                list.append(contentsOf: (details as! CropDetails).getInfoCellData())
+            } else {
+                list.append(contentsOf: (details as! DiseaseDetails).getInfoCellData())
+            }
+        }
+        
+        return list
+    }
+    
+    func getDetails(withCompletion completionHandler: @escaping ((Recent) -> Void)) {
+        if let _ = details {
+            completionHandler(self)
+            return
+        }
+        
+        if(prediction.kind == .crop) {
+            getDetails(for: CropDetails.self ,withCompletion: completionHandler)
+        } else {
+            getDetails(for: DiseaseDetails.self ,withCompletion: completionHandler)
+        }
+    }
+    
+    private func getDetails<T: Details>(for kind: T.Type, withCompletion completionHandler: @escaping ((Recent) -> Void)) {
+        let detailsRef = (UIApplication.shared.delegate as! AppDelegate).firestore.collection("details")
+        
+        detailsRef.document(prediction.predictedClass).getDocument { snapshot, error in
+            guard let snapshot = snapshot else { return }
+            
+            if let dataDict = snapshot.data(),
+                let data = try? JSONSerialization.data(withJSONObject: dataDict, options: []),
+                let details = try? JSONDecoder().decode(T.self, from: data) {
+                
+                self.details = details
+                self.infoList = self.updateInfoList()
+                
+                completionHandler(self)
             }
         }
     }

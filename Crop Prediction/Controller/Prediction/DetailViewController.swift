@@ -11,7 +11,7 @@ import UIKit
 protocol DetailViewControllerDelegate: NSObject {
     func save(recent: Recent)
     func performed(action: ActionCell.Action, on recent: Recent)
-    func getDetails(for prediction: Prediction, withCompletion completionHandler: @escaping (([String:String]) -> Void))
+    func getDetails(for prediction: Prediction, withCompletion completionHandler: @escaping ((CropDetails) -> Void))
 }
 
 class DetailViewController: UICollectionViewController {
@@ -38,6 +38,10 @@ class DetailViewController: UICollectionViewController {
     
 //    MARK: Model Variables
     var recent: Recent!
+    var rowCount: Int {
+        (mode == .crop) ? 6 : 5
+    }
+    var detailsLoaded = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,10 +79,15 @@ class DetailViewController: UICollectionViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+        super.viewDidAppear(animated)
         
-        delegate?.getDetails(for: recent.prediction) { details in
-            
+        
+        
+        if recent.details == nil {
+            recent.getDetails { _ in
+//                self.recent.details = 
+                self.collectionView.reloadSections(IndexSet(integer: 1))
+            }
         }
     }
     
@@ -146,7 +155,7 @@ class DetailViewController: UICollectionViewController {
         layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: itemPadding, bottom: 0, trailing: itemPadding)
         
         let groupWidth = layoutEnvironment.container.contentSize.width * width
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(groupWidth), heightDimension: .absolute(220))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(groupWidth), heightDimension: .absolute(CGFloat(44 * self.rowCount)))
         let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [layoutItem])
         
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
@@ -283,7 +292,7 @@ extension DetailViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch identifiers[section] {
         case .infoCell:
-            return 5
+            return recent.infoList.count
         case .actionCell:
             return ActionCell.actions.count
         default:
