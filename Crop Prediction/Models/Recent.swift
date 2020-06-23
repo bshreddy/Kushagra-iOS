@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 import FirebaseUI
 import FirebaseStorage
 
@@ -46,7 +47,7 @@ class Recent: Codable {
     
     var id: ID?
     var prediction: Prediction
-    var bookmarked: Bool {
+    private(set) var bookmarked: Bool {
         didSet {
             NotificationCenter.default.post(name: Recent.bookmarkDidChange, object: self)
         }
@@ -88,7 +89,23 @@ class Recent: Codable {
     }
     
     func toggleBookmark() {
+        guard let user = (UIApplication.shared.delegate as! AppDelegate).authUI.auth?.currentUser,
+            let id = id else {
+            return
+        }
+        
+        let recentsRef = (UIApplication.shared.delegate as! AppDelegate).firestore.collection("users").document(user.uid).collection("recents")
         bookmarked.toggle()
+        
+        recentsRef.document(id).updateData(["bkmrkd": bookmarked]) { error in
+            if error != nil {
+                print(error?.localizedDescription ?? "Unknown Error")
+                
+                DispatchQueue.main.async {
+                    self.bookmarked.toggle()
+                }
+            }
+        }
     }
     
     func loadImage(user: User, recentImagesRef: StorageReference,
