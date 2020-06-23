@@ -1,0 +1,68 @@
+/* 
+  Localizable.strings
+  Kushagra
+
+  Created by Sai Hemanth Bheemreddy on 23/06/20.
+  Copyright © 2020 Sai Hemanth Bheemreddy. All rights reserved.
+*/
+
+
+// Profile View Controller
+"Please Sign In to check your Profile"="Veuillez vous connecter pour vérifier votre profil";
+"Tap the \"Sign In\" button to sign-in"="Appuyez sur le bouton «Connexion» pour vous connecter";
+"Bookmarks"="Favoris";
+"Server Address"="Adresse du Serveur";
+"Settings"="Paramètres";
+"Help"="Aidez-moi";
+"Tell a Friend"="Invite un Ami";
+"Sign Out"="Déconnexion";
+"Enter address of AI Inference Server"="Entrez l'adresse du Serveur d'Inférence AI";
+"invite_messsage" = "Hé,\n\nKushagra App est une application intuitive et optimisée par l'AI que j'utilise pour identifier mes cultures, les maladies des cultures et trouver des solutions.\n\nObtenez-le gratuitement sur Play Store";
+"Save"="Enregistrer";
+"Cancel"="Annuler";
+
+// Master View Controller
+"Your Crops"="Vos Cultures";
+"Crop Diseases"="Maladies des cultures";
+"Select an Option"="Sélectionnez une option";
+"Camera"="Caméra";
+"Photo Library"="Galerie de photos";
+"Available Actions"="Actions disponibles";
+
+// Detail View Controller
+"Crop Details"="Détails du Cultures";
+"Disease Details"="Détails du Maladie";
+"New Crop Detection"="Nouvelle Détection de Culture";
+"New Disease Detection"="Nouvelle Détection de Maladie";
+"Name"="Name";
+"Address"="Adresse";
+"Add to Bookmarks"="Ajouter aux Favoris";
+"Remove from Bookmarks"="Supprimer dess Favoris";
+"Export to PDF"="Enregistrer au PDF";
+"Save Image to Photos"="Enregistrer l'Image à les Photos";
+"Save Map To Photos"="Enregistrer la Carte à les Photos";
+"Delete"="Supprimer";
+"Are your sure?"="Êtes-vous sûr?";
+"Discard"="Jeter";
+"Close"="Fermer";
+"Options"="Options";
+
+// Classes
+"coffee"="café";
+"cotton"="coton";
+"jute"="jute";
+"maize"="maïs";
+"millet"="millet";
+"rice"="riz";
+"sugarcane"="canne à sucre";
+"tea"="thé";
+"tomato"="tomate";
+"wheat"="blé";
+
+//Error Messages
+"An Unknown Error Occurred"="Une erreur inconnue est survenue";
+"An error occurred while saving"="Une erreur s'est produite lors de l'enregistrement";
+"Unable to Read Data.\nError while Parsing Data"="Impossible de lire Data.\nError lors de l'analyse des données";
+"Unable to Save for some unknown reason"="Impossible d'enregistrer pour une raison inconnue";
+"Unable to Delete for some unknown reason"="Impossible de supprimer pour une raison inconnue";
+"Error while displaying report"="Erreur lors de l'affichage du Rapport";

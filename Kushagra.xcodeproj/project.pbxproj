@@ -29,6 +29,7 @@
 		722D3C212486CBBE005D6D83 /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D3C202486CBBE005D6D83 /* MapCell.swift */; };
 		722D3C242487ECE3005D6D83 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D3C232487ECE3005D6D83 /* ListCell.swift */; };
 		7242EA5E24A1ECC600AC5870 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7242EA6024A1ECC600AC5870 /* Localizable.strings */; };
+		7242EA6924A20E3700AC5870 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7242EA6B24A20E3700AC5870 /* InfoPlist.strings */; };
 		72A6E8B724A0C22C001277FA /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6E8B624A0C22C001277FA /* ProfileCell.swift */; };
 		72A6E8B924A0F48B001277FA /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6E8B824A0F48B001277FA /* ReportViewController.swift */; };
 		72A6E8BB24A0F4A8001277FA /* ReportRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A6E8BA24A0F4A8001277FA /* ReportRenderer.swift */; };
@@ -83,6 +84,7 @@
 		7242EA6424A1F49100AC5870 /* te */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = te; path = te.lproj/Main.strings; sourceTree = "<group>"; };
 		7242EA6524A1F49200AC5870 /* te */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = te; path = te.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7242EA6624A20CE400AC5870 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7242EA6A24A20E3700AC5870 /* te */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = te; path = te.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		72A6E8B624A0C22C001277FA /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		72A6E8B824A0F48B001277FA /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		72A6E8BA24A0F4A8001277FA /* ReportRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRenderer.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				7242EA6024A1ECC600AC5870 /* Localizable.strings */,
+				7242EA6B24A20E3700AC5870 /* InfoPlist.strings */,
 				72E144E8248517990009469E /* Extensions.swift */,
 				722D3C112486AD6A005D6D83 /* Classes.json */,
 				722D3C0B248622EE005D6D83 /* TestData.json */,
@@ -337,6 +340,7 @@
 				7213508E24850CCE001A7ED0 /* Profile.storyboard in Resources */,
 				722589A9248507C7008091DB /* Assets.xcassets in Resources */,
 				72A6E8BD24A0F4BE001277FA /* report.html in Resources */,
+				7242EA6924A20E3700AC5870 /* InfoPlist.strings in Resources */,
 				722589A7248507C5008091DB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,6 +491,14 @@
 				7242EA6624A20CE400AC5870 /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		7242EA6B24A20E3700AC5870 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7242EA6A24A20E3700AC5870 /* te */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
