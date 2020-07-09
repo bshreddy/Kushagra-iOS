@@ -69,16 +69,19 @@ class UserProfileCell: UICollectionViewCell, SelfConfiguringProfileCell {
             stackViewLeadingConstraint.constant = 16
             
             self.userDP.image = UIImage(systemName: "person.crop.circle")
-            URLSession.shared.dataTask(with: user.photoURL!) { data, response, error in
-                guard let data = data else {
-                    print(error?.localizedDescription ?? "Unknown Error")
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    self.userDP.image = UIImage(data: data)
-                }
-            }.resume()
+            
+            if let photoURL = user.photoURL {
+                URLSession.shared.dataTask(with: photoURL) { data, response, error in
+                    guard let data = data else {
+                        print(error?.localizedDescription ?? "Unknown Error")
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.userDP.image = UIImage(data: data)
+                    }
+                }.resume()
+            }
         } else {
             self.username.text = "Please Sign In to check your Profile".localized
             self.email.text = "Tap the \"Sign In\" button to sign-in".localized

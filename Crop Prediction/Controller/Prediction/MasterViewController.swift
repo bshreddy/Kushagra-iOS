@@ -154,6 +154,8 @@ class MasterViewController: UICollectionViewController {
             } else {
                 self.recentsRef = nil
                 self.recentImagesRef = nil
+                
+                self.splitViewController?.showDetailViewController(self.storyboard!.instantiateViewController(identifier: "Empty Detail"), sender: self)
             }
             
             self.loadData()

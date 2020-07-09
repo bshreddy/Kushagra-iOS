@@ -17,8 +17,6 @@ class ReportRenderer: UIPrintPageRenderer {
     static let size = CGSize(width: 595, height: 842)
     static let pageFrame = CGRect(origin: .zero, size: size)
     
-    var prediction: Prediction!
-    
     override init() {
         super.init()
         

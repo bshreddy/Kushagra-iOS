@@ -33,7 +33,7 @@ class Location: Codable, CustomStringConvertible {
             return address
         } else {
             if performAddressLookup {
-                lookupCurrentLocation()
+                lookupAddress()
                 performAddressLookup = false
             }
             
@@ -95,7 +95,7 @@ class Location: Codable, CustomStringConvertible {
         try container.encode(altitude, forKey: .altitude)
     }
     
-    func lookupCurrentLocation(withCompletion completionHandler: ((String?) -> Void)? = nil) {
+    func lookupAddress(withCompletion completionHandler: ((String?) -> Void)? = nil) {
         let geocoder = CLGeocoder()
         
         geocoder.reverseGeocodeLocation(clLocation, preferredLocale: .autoupdatingCurrent) { placemarks, error in

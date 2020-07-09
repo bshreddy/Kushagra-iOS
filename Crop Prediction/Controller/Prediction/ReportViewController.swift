@@ -48,7 +48,11 @@ class ReportViewController: UIViewController, WKNavigationDelegate {
     }
     
     @IBAction func cancelTapped(_ sender: Any) {
-        self.dismiss(animated: true)
+        if(splitViewController?.isDetailsVisible ?? false) {
+            splitViewController?.showDetailViewController(storyboard!.instantiateViewController(identifier: "Empty Detail"), sender: self)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func exportBtnTapped(_ sender: UIBarButtonItem) {

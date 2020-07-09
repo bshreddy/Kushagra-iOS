@@ -55,7 +55,7 @@ class Recent: Codable {
             NotificationCenter.default.post(name: Recent.bookmarkDidChange, object: self)
         }
     }
-    lazy var infoList: [InfoCardCellData] = {
+    private(set) lazy var infoList: [InfoCardCellData] = {
         updateInfoList()
     }()
     
