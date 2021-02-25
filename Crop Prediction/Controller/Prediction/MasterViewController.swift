@@ -252,6 +252,11 @@ class MasterViewController: UICollectionViewController {
             })
 
             actionSheet.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel))
+            
+            if let popoverController = actionSheet.popoverPresentationController {
+                popoverController.barButtonItem = sender
+            }
+            
             self.present(actionSheet, animated: true)
         } else {
             imagePicker.sourceType = .photoLibrary
