@@ -33,8 +33,9 @@ class Recent: Codable {
         
         return nil
     }()
+    
     static let picturesDirectory: URL = {
-        let picDir = FileManager.default.urls(for: .picturesDirectory, in: .userDomainMask).first!
+        let picDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
             .appendingPathComponent("com.project.CropPrediction", isDirectory: true)
             .appendingPathComponent("recents", isDirectory: true)
         
